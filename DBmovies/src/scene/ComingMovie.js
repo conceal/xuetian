@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {StyleSheet , View ,  Text , FlatList , ActivityIndicator} from 'react-native';
+import {StyleSheet , View ,  Text , FlatList , ActivityIndicator , TouchableOpacity} from 'react-native';
 import {queryMovies , comingMovies} from '../common/services'
 import MovieItemCell from '../widget/movieItemCell';
 
@@ -30,12 +30,11 @@ export default class PlayingMovies extends Component{
         )
     }
 
-    renderItem = (item)=> {
-        return(
-            <MovieItemCell 
-                movie={item.item}
-                onPress={this.props.onPress}
-            />
+    renderItem = (item) => {
+        return (
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate('Details' , {movie:item.item})}>
+                <MovieItemCell movie={item.item}/>
+            </TouchableOpacity>
         )
     }
 

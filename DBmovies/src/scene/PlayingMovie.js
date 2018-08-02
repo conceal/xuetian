@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {StyleSheet , View , Text , FlatList , ActivityIndicator} from 'react-native';
+import {StyleSheet , View , Text , FlatList , ActivityIndicator , TouchableHighlight} from 'react-native';
 import {queryMovies , comingMovies} from '../common/services'
 import MovieItemCell from '../widget/movieItemCell';
 
@@ -8,7 +8,7 @@ export default class PlayingMovies extends Component{
         super(props);
         this.state = {
             movieList:[],   //电影列表数据源
-            loaded:false,   //又来控制loading的显示 
+            loaded:false,   //又来控制loading的显示          
         }
     }
 
@@ -30,12 +30,15 @@ export default class PlayingMovies extends Component{
         )
     }
 
-    renderItem = (item) => {
+    renderItem = (item) =>{
         return (
-            <MovieItemCell 
-                movie={item.item} 
-                onPress={this.props.onPress}
-            />
+          <View>
+            <TouchableHighlight onPress={()=> this.props.navigation.navigate('Details',{movie:item.item})}>
+              <MovieItemCell 
+                  movie={item.item} 
+              />
+            </TouchableHighlight>
+          </View>
         )
     }
 

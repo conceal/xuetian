@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {TouchableHighlight, View, Image, Text, StyleSheet} from 'react-native';
 import Color from "../common/color";
 
-let navigation = null;
 export default class MovieItemCell extends Component {
   constructor(props){
     super(props);
@@ -11,8 +10,9 @@ export default class MovieItemCell extends Component {
   render() {
     let {movie} = this.props;
     let hasAverageScore = (movie.rating.average !== 0);
+    // let {navigate} = this.props.navigation;
     return (
-      <TouchableHighlight onPress={this.props.onPress}>
+      <View>
         <View style={styles.container}>
           <Image
             source={{uri: movie.images.large}}
@@ -41,7 +41,7 @@ export default class MovieItemCell extends Component {
             </View>
           </View>
         </View>
-      </TouchableHighlight>
+        </View>
     )
   }
 }

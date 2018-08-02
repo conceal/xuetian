@@ -13,7 +13,6 @@ import Color from '../common/color'
 import PlayingMovie from './PlayingMovie';
 import ComingMovie from './ComingMovie';
 
-let navigation = null;
 export default class HomeScreen extends Component {
     static navigationOptions={
         headerTitle:'豆瓣电影',
@@ -26,7 +25,7 @@ export default class HomeScreen extends Component {
         this.state={
             selectedTab : 'PlayingMovie',
         };
-        navigation = this.props.navigation;
+        let movie = [];
     }
   render() {
     return (
@@ -42,12 +41,14 @@ export default class HomeScreen extends Component {
                 //选中时标题样式
                 selectedTitleStyle={styles.selectedTabText}
                 //图标
-                renderIcon={()=> <Image style={styles.icon} source={require('../image/playing-active.png')}/>}
+                renderIcon={()=> <Image style={styles.icon} source={require('../image/playing.png')}/>}
                 //选中时图标
                 renderSelectedIcon={()=> <Image style={styles.selectedIcon} source={require('../image/playing-active.png')}/>}
                 //点击PlayingMovie
                 onPress={()=> this.setState({selectedTab:'PlayingMovie'})} >
-                <PlayingMovie   onPress={()=> this.props.navigation.navigate('Details')}/>
+                <PlayingMovie {...this.props}
+                    // onPress={()=> this.props.navigation.navigate('Details' , {movie:this.props.movieList})}
+                />
             </TabNavigator.Item>  
 
             <TabNavigator.Item 
@@ -55,10 +56,13 @@ export default class HomeScreen extends Component {
                 title='即将上映'
                 titleStyle={styles.tabText}
                 selectedTitleStyle={styles.selectedTabText}
-                renderIcon={()=> <Image style={styles.icon} source={require('../image/coming-active.png')}/>}
+                renderIcon={()=> <Image style={styles.icon} source={require('../image/coming.png')}/>}
                 renderSeclectedIcon={()=> <Image style={styles.selectedIcon} source={require('../image/coming-active.png')}/>}
                 onPress={()=> this.setState({selectedTab:'ComingMovie'})} >
-                <ComingMovie  onPress={()=> this.props.navigation.navigate('Details')}/>
+                <ComingMovie  
+                    {...this.props}
+                    // onPress={()=> this.props.navigation.navigate('Detail',{movie:movie})}
+                    />
             </TabNavigator.Item>
         </TabNavigator>
       </View>
@@ -85,6 +89,7 @@ const styles = StyleSheet.create({
     selectedIcon:{
         width:30,
         height:22,
-    }
+    },
+    
 })
 
