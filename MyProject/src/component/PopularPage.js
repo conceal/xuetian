@@ -3,6 +3,7 @@ import {StyleSheet, Text, View , ListView , RefreshControl} from 'react-native';
 import DataRepository from '../widget/Network';
 import ScrollableTabView , {ScrollableTabBar} from 'react-native-scrollable-tab-view';
 import RepositoryCell from '../widget/RepositoryCell';
+import NavigationBar from './NavigationBar';
 
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR='&sort=stars';
@@ -10,22 +11,30 @@ const QUERY_STR='&sort=stars';
 export default class PopularPage extends Component {
   render() {
     return (
-        <ScrollableTabView
-            tabBarBackgroundColor="#2196F3"
-            tabBarInactiveTextColor='mincream'
-            tabBarActiveTextColor='white'
-            tabBarUnderlineStyle={{backgroundColor:'#e7e7e7' , height:2}}
-            renderTabBar={()=><ScrollableTabBar/>}
-        >
-          <PopularTab tabLabel="Java">JAVA</PopularTab>
-          <PopularTab tabLabel="iOS">IOS</PopularTab>
-          <PopularTab tabLabel="Android">Android</PopularTab>
-          <PopularTab tabLabel="JavaScript">JS</PopularTab>
-
-        </ScrollableTabView>
+        <View style={{flex:1}}>
+          <NavigationBar
+              title='最新'
+              statusBar={{
+                  backgroundColor:'#2196F3'
+                }}
+          />
+          <ScrollableTabView
+              tabBarBackgroundColor="#2196F3"
+              tabBarInactiveTextColor='mincream'
+              tabBarActiveTextColor='white'
+              tabBarUnderlineStyle={{backgroundColor:'#e7e7e7' , height:2}}
+              renderTabBar={()=><ScrollableTabBar/>}
+          >
+            <PopularTab tabLabel="Java">JAVA</PopularTab>
+            <PopularTab tabLabel="iOS">IOS</PopularTab>
+            <PopularTab tabLabel="Android">Android</PopularTab>
+            <PopularTab tabLabel="JavaScript">JS</PopularTab>
+          </ScrollableTabView>
+        </View>
     );
   }
 }
+
 
 class PopularTab extends Component{
   constructor(props) {
@@ -44,7 +53,8 @@ class PopularTab extends Component{
   loadData = ()=>{
     this.setState({
       isLoading: true,
-    })
+    });
+
     let url = URL+this.props.tabLabel+QUERY_STR;
     this.dataRepository.fetchNetRepository(url)
         .then((jsonData)=>{
@@ -56,7 +66,8 @@ class PopularTab extends Component{
         .catch((error)=> {
           console.log(error);
         })
-    }
+    };
+
     render(){
       return(
           <View style={{flex:1}}>
@@ -93,4 +104,4 @@ const styles = StyleSheet.create({
   tips:{
     fontSize:30,
   }
-})
+});

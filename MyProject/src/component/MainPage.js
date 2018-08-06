@@ -10,7 +10,8 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View , Image} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import PopularPage from './PopularPage';
-import Page from './Page';
+import AsyncStoragePage from './AsyncStoragePage';
+import MyPage from './MyPage';
 
 export default class MainPage extends Component{
   constructor(props) {
@@ -41,7 +42,7 @@ export default class MainPage extends Component{
                 renderSelectedIcon={() => <Image source={require('../image/image02.png')} style={styles.iconSelectedStyle}/>}
                 onPress={() => this.setState({selectedTab:'friend'})}
             >
-              <Page/>
+              <AsyncStoragePage/>
             </TabNavigator.Item>
             <TabNavigator.Item
                 selected={this.state.selectedTab === 'QQ'}
@@ -51,7 +52,7 @@ export default class MainPage extends Component{
                 renderSelectedIcon={() => <Image source={require('../image/image03.png')} style={styles.iconSelectedStyle}/>}
                 onPress={() => this.setState({selectedTab:'QQ'})}
             >
-              <View style={styles.iconStyle}></View>
+              <View style={styles.iconStyle}/>
             </TabNavigator.Item>
             <TabNavigator.Item
                 selected={this.state.selectedTab === 'QQPlace'}
@@ -61,7 +62,7 @@ export default class MainPage extends Component{
                 renderSelectedIcon={() => <Image source={require('../image/image04.png')} style={styles.iconSelectedStyle}/>}
                 onPress={() => this.setState({selectedTab:'QQPlace'})}
             >
-              <View style={styles.iconStyle}/>
+              <MyPage {...this.props}/>
             </TabNavigator.Item>
           </TabNavigator>
         </View>
