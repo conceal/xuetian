@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Alert, Image, ActivityIndicator, ScrollView, findNodeHandle, Platform, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
 import HttpUtils from '../../../config/HttpUtils';
-import {movieDetails, CommentCells} from '../../../config/utils/Services';
+import {movieDetails, commentCells} from '../../../config/utils/Services';
 import {VibrancyView, BlurView} from 'react-native-blur';
 import {Actions} from 'react-native-router-flux';
 import MiniComment from './comment/MiniCommentCell';
@@ -53,7 +53,7 @@ export default class MovieDetails extends Component {
         }).catch((error)=> {
       alert(error);
     });
-    HttpUtils.get(CommentCells(id))
+    HttpUtils.get(commentCells(id))
         .then((response)=> {
           this.setState({
             miniData:response.data.mini,
@@ -421,12 +421,12 @@ export default class MovieDetails extends Component {
                 style={[styles.navBarStyle,{opacity: 0}]}
             >
               <View style={styles.navComtentStyle}>
-                <TouchableOpacity onPress={()=> Actions.pop()}>
-                  <Icon3 name="ios-arrow-back" size={20} color={CommonStyle.white}/>
+                <TouchableOpacity  style={{marginLeft:8, width:44, height:44}} onPress={()=> Actions.pop()}>
+                  <Icon3 name="ios-arrow-back" size={26} color={CommonStyle.white}/>
                 </TouchableOpacity>
-                <Text style={{color:CommonStyle.white, fontSize:17}}>{basic.name}</Text>
+                <Text style={{color:CommonStyle.white, fontSize:20}}>{basic.name}</Text>
                 <TouchableOpacity style={{marginRight:5}} onPress={()=> alert('功能暂未实现')}>
-                  <Icon4 name="share-square-o" size={20} color={CommonStyle.white} />
+                  <Icon4 name="share-square-o" size={26} color={CommonStyle.white} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -515,9 +515,7 @@ const styles = StyleSheet.create({
     height:44,
     marginTop:20,
     flexDirection:'row',
-    alignItems:'center',
-    paddingHorizontal:10,
-    justifyContent:'space-between'
+    justifyContent:'space-between',
   },
   navBarStyle: {
     height: 64,

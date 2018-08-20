@@ -33,12 +33,12 @@ export default class ShowingMovieList extends Component {
             isLoaded:true,
           });
         }).catch((error)=> {
-      console(error);
-    });
+            console(error);
+        });
   }
 
   render() {
-    let dataSource = this.state. showingMovieList;
+    let dataSource = this.state.showingMovieList;
     if (!this.state.isLoaded) {
       return (
           <View style={{justifyContent: 'center', alignItems: 'center'}}>

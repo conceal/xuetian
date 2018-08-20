@@ -10,6 +10,7 @@
     "antd-mobile": "^2.2.3",
     "antd-mobile-rn": "^2.2.1",
     "babel-plugin-import": "^1.8.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-native": "0.56.0",
