@@ -4467,6 +4467,12 @@ react-lifecycles-compat@^3, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "http://registry.npm.taobao.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
+react-native-blur@^3.2.2:
+  version "3.2.2"
+  resolved "http://registry.npm.taobao.org/react-native-blur/download/react-native-blur-3.2.2.tgz#5bfb50638d148982c9560436554ed01d77d6d07d"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-camera-roll-picker@^1.2.1:
   version "1.2.3"
   resolved "http://registry.npm.taobao.org/react-native-camera-roll-picker/download/react-native-camera-roll-picker-1.2.3.tgz#b117fd3a2b9012dcccee1261a9bc427226b8d6d2"
@@ -5068,6 +5074,10 @@ rmc-trigger@1.x:
     rc-animate "^2.4.4"
     rc-util "^4.5.1"
     rmc-align "^1.0.0"
+
+rn-splash-screen@^5.2.0:
+  version "5.2.0"
+  resolved "http://registry.npm.taobao.org/rn-splash-screen/download/rn-splash-screen-5.2.0.tgz#1ce509e27d14d3dd0949427667fbc3d2a8dd853c"
 
 rn-topview@^0.1.6:
   version "0.1.6"

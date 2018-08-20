@@ -55,7 +55,7 @@ const CommonStyle = {
   // 左边距
   marginLeft: 10,
   // 下边距
-  marginBotton: 10,
+  marginBottom: 10,
   // 右边距
   marginRight: 10,
   // 内边距

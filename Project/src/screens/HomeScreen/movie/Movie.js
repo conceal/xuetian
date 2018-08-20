@@ -7,28 +7,42 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Alert,} from 'react-native';
 import {SegmentedControl} from 'antd-mobile-rn';
 
 import ShowingMovieList from './showingMovie/ShowingMovieList';
 import ComingMovieList from './comingMovie/ComingMovieList';
 import {CommonStyle} from '../../../config/utils/utils';
 import HttpUtils from '../../../config/HttpUtils';
+import SplashScreen from 'rn-splash-screen';
+import {comingMovies, showingMovies} from '../../../config/utils/Services';
 
 export default class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
       refreshing: false,
-      showMovieList:[],
-      comingMovieList:[],
-      attentionList:[],
+      showingMovieList:[],
       selectedTab:'正在热映',
+      isLoading: true,
     }
   }
 
   componentDidMount() {
-    HttpUtils.get()
+    setTimeout(()=> {
+      this.setState({
+        isLoading: false,
+      });
+    },1000);
+  }
+
+
+
+  componentDidUpdate() {
+    if(!this.state.isLoading) {
+      //Hide splash screen
+      SplashScreen.hide();
+    }
   }
 
   onValueChange = (value)=> {
@@ -38,25 +52,29 @@ export default class Movie extends Component {
   };
 
   render() {
-    return (
-       <View style={styles.container}>
-         <View style={styles.navBarStyle}>
-           <View style={styles.segmentedControlStyle}>
-             <SegmentedControl
-                 style={styles.tabStyle}
-                 selectedIndex={0}
-                 values={['正在热映', '即将上映']}
-                 onValueChange={(value)=> this.onValueChange(value)}
-             />
-           </View>
-         </View>
-         {
-           this.state.selectedTab === '正在热映' ?
-             <ShowingMovieList/> :
-             <ComingMovieList/>
-         }
-       </View>
-    );
+    if (this.state.isLoading) {
+      return null;
+    } else {
+      return (
+          <View style={styles.container}>
+            <View style={styles.navBarStyle}>
+              <View style={styles.segmentedControlStyle}>
+                <SegmentedControl
+                    style={styles.tabStyle}
+                    selectedIndex={0}
+                    values={['正在热映', '即将上映']}
+                    onValueChange={(value) => this.onValueChange(value)}
+                />
+              </View>
+            </View>
+            {
+              this.state.selectedTab === '正在热映' ?
+                  <ShowingMovieList dataArray={this.state.showingMovieList} /> :
+                  <ComingMovieList/>
+            }
+          </View>
+      );
+    }
   }
 }
 
