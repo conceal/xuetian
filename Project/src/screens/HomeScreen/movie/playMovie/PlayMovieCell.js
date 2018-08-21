@@ -15,7 +15,7 @@ export default class PlayMovieCell extends Component {
   render() {
     let data = this.props.playData;
     return (
-        <TouchableOpacity style={styles.container} onPress={()=> Actions.PlayMovie({url:data.url})}>
+        <TouchableOpacity style={styles.container} onPress={()=> Actions.PlayMovie({url:data.url, title:data.title})}>
           <ImageBackground style={styles.imageStyle} source={{uri:data.image}}>
             <Icon name="play-circle-outline" size={30} color={CommonStyle.white}/>
           </ImageBackground>

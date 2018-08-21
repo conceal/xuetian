@@ -213,7 +213,7 @@ export default class MovieDetails extends Component {
                     </View>
                     <Text style={{color: CommonStyle.black, fontSize: 13, marginTop: 3}}>{basic.releaseDate}-{basic.releaseArea}上映</Text>
                     <Text style={{color: CommonStyle.black, fontSize: 13, marginTop: 3}}>{basic.commentSpecial}</Text>
-                    <View>
+                    <View style={{flexDirection: 'row', marginTop: 5}}>
                       <View style={styles.borderText}>
                         <Text style={{paddingVertical: 3, paddingHorizontal: 5, color:'#64788E', fontSize:10}}>中国巨幕</Text>
                       </View>
@@ -276,7 +276,7 @@ export default class MovieDetails extends Component {
                       removeClippedSubviews={true}
                       showsHorizontalScrollIndicator={false}
                   >
-                    {this.renderActorList([basic.actors], basic.movieId)}
+                    {this.renderActorList(basic.actors, basic.movieId)}
                   </ScrollView>
                 </View>
 

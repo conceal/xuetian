@@ -139,12 +139,14 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-blur')
-    compile project(':rn-splash-screen')
-    compile project(':react-native-vector-icons')
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    compile "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':react-native-orientation')
+    implementation project(':react-native-video')
+    implementation project(':react-native-blur')
+    implementation project(':rn-splash-screen')
+    implementation project(':react-native-vector-icons')
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.facebook.react:react-native:+"  // From node_modules
 }
 
 // Run this once to be able to run the application with BUCK
