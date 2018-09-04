@@ -8,7 +8,7 @@ const NAV_BAR_HEIGHT_IOS = 44;
 const STATUS_BAR_HEIGHT = 20;
 const StatusBarShape = {
   backgroundColor: PropTypes.string,
-  barStyle:PropTypes.oneOf('default', 'light-content', 'dark-content'),
+  barStyle:PropTypes.oneOf['default', 'light-content', 'dark-content'],
   hidden:PropTypes.bool,
 };
 
@@ -43,7 +43,7 @@ export default class NavigationBar extends Component {
                     <StatusBar {...this.props.statusBar}/>
                   </View>;
     let titleView = this.props.titleView ? this.props.titleView : <Text style={styles.titleStyle}>{this.props.title}</Text>;
-    let content = <View style={styles.navBar}>
+    let content = <View style={this.props.navBar ? this.props.navBar : styles.navBar}>
                     {this.props.leftButton}
                     <View style={styles.titleViewContainer}>
                       {status}
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'white',
   },
   statusBar: {

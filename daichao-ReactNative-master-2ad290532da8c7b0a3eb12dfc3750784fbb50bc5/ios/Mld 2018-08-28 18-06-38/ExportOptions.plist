@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<true/>
+	<key>method</key>
+	<string>ad-hoc</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.shumei.Demo</key>
+		<string>ad_hoc</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>F69961C1CC53FBC9F19FC3FDF3F8A790B5038A67</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>GVCC7N2J83</string>
+	<key>thinning</key>
+	<string>&lt;thin-for-all-variants&gt;</string>
+</dict>
+</plist>

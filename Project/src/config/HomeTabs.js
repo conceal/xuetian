@@ -14,11 +14,11 @@ import Icon1 from 'react-native-vector-icons/MaterialIcons'
 import Icon2 from 'react-native-vector-icons/Entypo'
 import Icon3 from 'react-native-vector-icons/FontAwesome'
 
-import Movie from '../screens/HomeScreen/movie/Movie';
-import Music from '../screens/HomeScreen/music/Music';
-import Picture from '../screens/HomeScreen/picture/Picture';
-import Read from '../screens/HomeScreen/read/Read';
-import Mine from '../screens/HomeScreen/mine/Mine';
+import Movie from '../screens/movie/Movie';
+import Music from '../screens/music/Music';
+import Picture from '../screens/picture/Picture';
+import Read from '../screens/newRead/Read';
+import Mine from '../screens/mine/Mine';
 import {CommonStyle} from './utils/utils';
 
 export default class HomeTabs extends Component {
@@ -38,7 +38,7 @@ export default class HomeTabs extends Component {
               titleStyle={styles.titleStyle}
               selectedTitleStyle={styles.selectedTitleStyle}
               renderIcon={() => <Icon0 name="movie-roll" size={25} color={CommonStyle.textGrayColor}/>}
-              renderSelectedIcon={() => <Icon0 name="movie-roll" size={25} color="#00BFFF"/>}
+              renderSelectedIcon={() => <Icon0 name="movie-roll" size={28} color="#00BFFF"/>}
               onPress={()=> this.setState({selectedTab:'movie'})}
           >
             <Movie/>
@@ -49,7 +49,7 @@ export default class HomeTabs extends Component {
               titleStyle={styles.titleStyle}
               selectedTitleStyle={styles.selectedTitleStyle}
               renderIcon={() => <Icon0 name="music-circle" size={25} color={CommonStyle.textGrayColor}/>}
-              renderSelectedIcon={() => <Icon0 name="music-circle" size={25} color="#00BFFF"/>}
+              renderSelectedIcon={() => <Icon0 name="music-circle" size={28} color="#00BFFF"/>}
               onPress={()=> this.setState({selectedTab:'music'})}
           >
             <Music/>
@@ -60,7 +60,7 @@ export default class HomeTabs extends Component {
               titleStyle={styles.titleStyle}
               selectedTitleStyle={styles.selectedTitleStyle}
               renderIcon={() => <Icon1 name="photo-filter" size={25} color={CommonStyle.textGrayColor}/>}
-              renderSelectedIcon={() => <Icon1 name="photo-filter" size={25} color="#00BFFF"/>}
+              renderSelectedIcon={() => <Icon1 name="photo-filter" size={28} color="#00BFFF"/>}
               onPress={()=> this.setState({selectedTab:'picture'})}
           >
             <Picture/>
@@ -71,7 +71,7 @@ export default class HomeTabs extends Component {
               titleStyle={styles.titleStyle}
               selectedTitleStyle={styles.selectedTitleStyle}
               renderIcon={() => <Icon2 name="unread" size={25} color={CommonStyle.textGrayColor}/>}
-              renderSelectedIcon={() => <Icon2 name="unread" size={25} color="#00BFFF"/>}
+              renderSelectedIcon={() => <Icon2 name="unread" size={28} color="#00BFFF"/>}
               onPress={()=> this.setState({selectedTab:'read'})}
           >
             <Read/>
@@ -82,7 +82,7 @@ export default class HomeTabs extends Component {
               titleStyle={styles.titleStyle}
               selectedTitleStyle={styles.selectedTitleStyle}
               renderIcon={() => <Icon3 name="user" size={25} color={CommonStyle.textGrayColor}/>}
-              renderSelectedIcon={() => <Icon3 name="user" size={25} color="#00BFFF"/>}
+              renderSelectedIcon={() => <Icon3 name="user" size={28} color="#00BFFF"/>}
               onPress={()=> this.setState({selectedTab:'me'})}
           >
             <Mine/>

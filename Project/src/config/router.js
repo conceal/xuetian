@@ -9,13 +9,17 @@
 import React, {Component} from 'react';
 import {Router, Scene} from 'react-native-router-flux';
 import Home from './HomeTabs';
-import MovieDetails from '../screens/HomeScreen/movie/MovieDetails';
-import PlayMovieList from '../screens/HomeScreen/movie/playMovie/PlayMovieList';
-import ActorList from '../screens/HomeScreen/movie/ActorList';
-import MiniCommentList from '../screens/HomeScreen/movie/comment/MiniCommentList';
-import PlusCommentList from '../screens/HomeScreen/movie/comment/PlusCommentList';
-import StagePicture from '../screens/HomeScreen/movie/comment/StagePicture';
-import PlayMovie from '../screens/HomeScreen/movie/playMovie/PlayMovie';
+import MovieDetails from '../screens/movie/MovieDetails';
+import PlayMovieList from '../screens/movie/playMovie/PlayMovieList';
+import ActorList from '../screens/movie/ActorList';
+import MiniCommentList from '../screens/movie/comment/MiniCommentList';
+import PlusCommentList from '../screens/movie/comment/PlusCommentList';
+import StagePicture from '../screens/movie/comment/StagePicture';
+import PlayMovie from '../screens/movie/playMovie/PlayMovie';
+import ReadDetail from '../screens/read/ReadDetail';
+import NewDetails from '../screens/newRead/NewDetails';
+import AuthorScreen from '../screens/newRead/AuthorScreen';
+
 
 export default class Routers extends Component {
   render() {
@@ -30,6 +34,9 @@ export default class Routers extends Component {
             <Scene key='PlusCommentList' component={PlusCommentList} hideNavBar/>
             <Scene key='StagePicture' component={StagePicture} hideNavBar/>
             <Scene key='PlayMovie' component={PlayMovie} hideNavBar/>
+            <Scene key='ReadDetail' component={ReadDetail} hideNavBar/>
+            <Scene key='NewDetails' component={NewDetails} hideNavBar/>
+            <Scene key='AuthorScreen' component={AuthorScreen} hideNavBar/>
           </Scene>
         </Router>
     );

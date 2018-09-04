@@ -1,0 +1,50 @@
+[
+  {
+    "key":" ",
+    "data":
+    [
+      {
+        "icon":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrj5yspsj301a0140hm.jpg",
+        "text":"我的邀请",
+        "comment":" ",
+        "image":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrl215gyj301o0140bx.jpg"
+      },
+      {
+        "icon":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrlpypxsj30140140n8.jpg",
+        "text":"我的奖励",
+        "comment":"0.00元",
+        "image":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrl215gyj301o0140bx.jpg"
+      },
+      {
+        "icon":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrmiu3fij30140140sh.jpg",
+        "text":"常见帮助",
+        "comment":" ",
+        "image":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrl215gyj301o0140bx.jpg"
+      }
+    ]
+  },
+  {
+    "key":"  ",
+    "data":
+    [
+      {
+        "icon":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqyjob0l8j301e01e741.jpg",
+        "text":"微信公众号",
+        "comment":"anxindai360",
+        "image":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrl215gyj301o0140bx.jpg"
+      },
+      {
+        "icon":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqro2vniyj30140143y9.jpg",
+        "text":"版本升级",
+        "comment":" ",
+        "image":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrl215gyj301o0140bx.jpg"
+      },
+      {
+        "icon":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqromtknmj30140140rh.jpg",
+        "text":"关于我们",
+        "comment":" ",
+        "image":"http://ww1.sinaimg.cn/large/0077HGE3gy1ftqrl215gyj301o0140bx.jpg"
+      }
+    ]
+  }
+]
