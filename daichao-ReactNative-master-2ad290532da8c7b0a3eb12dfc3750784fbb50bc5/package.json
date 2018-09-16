@@ -7,6 +7,8 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"jcore-react-native": "^1.2.9",
+		"jpush-react-native": "^2.2.9",
 		"prop-types": "^15.6.2",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.3",
@@ -14,6 +16,7 @@
 		"react-native-deprecated-custom-components": "^0.1.2",
 		"react-native-image-picker": "^0.26.10",
 		"react-native-scrollable-tab-view": "^0.8.0",
+		"react-native-swipeable": "^0.6.0",
 		"react-native-swiper": "^1.5.13",
 		"react-native-tab-navigator": "^0.3.4",
 		"react-native-vector-icons": "^5.0.0",

@@ -15,7 +15,7 @@ export default class SearchInputPart extends Component{
     constructor(props){
         super(props);
         this.state={
-            text:null
+            text:""
         }
     }
     render(){

@@ -4,17 +4,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  Picker,
   Dimensions,
   StatusBar, Alert,
 } from 'react-native';
-import NetUtils from "../../Common/NetUtils";
-import * as ScreenUtil from "../../Common/ScreenUtils";
+import NetUtils from "../Common/NetUtils";
+import * as ScreenUtil from "../Common/ScreenUtils";
 const {width} = Dimensions.get('window');
-let url = 'http://47.98.148.58/app/user/verificationCode.do';
-export default class Prove extends Component{
+let url = 'http://47.98.148.58/app/user/dcLoginCheckByCode.do';
+export default class LoginProve extends Component{
   static navigationOptions={
     headerStyle:{
       marginTop:StatusBar.currentHeight
@@ -27,8 +25,7 @@ export default class Prove extends Component{
       time:30,
       inputTexts: new Array(6),
       text:'',
-      istrue:1,
-      isLoading:true,
+      isRight:1,
       editable:true
     }
   }
@@ -67,17 +64,18 @@ export default class Prove extends Component{
     let inputs = [];
     const {inputTexts} = this.state;
     for (let i = 0; i < 6; i++) {
-      let input = <View  style={styles.textInput}>
-        <Text
-            key={i}>
-          {inputTexts[i]}
-        </Text>
-      </View>;
+      let input = <TextInput
+          key={i}
+          underlineColorAndroid="gray"
+          editable={false}
+          maxLength={1}
+          style={styles.textInput}>
+        {inputTexts[i]}
+      </TextInput>;
       inputs.push(input);
     }
     return inputs;
   }
-
   textLogin(){
     console.log(this.state.text);
     this.netUtils.fetchNetRepository(url,
@@ -85,18 +83,14 @@ export default class Prove extends Component{
     )
         .then(result => {
           console.log(result);
-          let data = result.code;
+          let mResult = result.code;
           this.setState({
-            istrue:data,
-            isLoading:false
+            isRight:mResult
           });
-          console.log(data);
-          if (data === 0){
-            this.props.navigation.navigate('Invite');
-          } else {
+          if (this.state.isRight === 0){
             Alert.alert(
                 '提示', //提示标题
-                "验证码或者网络错误", //提示内容
+                '登录成功', //提示内容
                 [
                   {
                     text: '确定'
@@ -104,12 +98,19 @@ export default class Prove extends Component{
                 ] //按钮集合
             );
           }
-        })
-        .catch(error => {
-          this.setState({
-            result: JSON.stringify(error),
-          })
+          if (this.state.isRight === 1){
+            Alert.alert(
+                '提示', //提示标题
+                '登录失败', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
         });
+
   }
 
   render(){
@@ -141,11 +142,12 @@ export default class Prove extends Component{
                         this.textLogin()
                       }}
                   />:
-                  <View/>
+                  <Text>{this.state.text}</Text>
               }
               {this._renderInputs()}
             </View>
           </TouchableOpacity>
+
           {this.TextAdd()}
 
         </View>
@@ -169,11 +171,6 @@ const styles=StyleSheet.create({
     width:width-150
   },
   textInput:{
-    alignItems:'center',
-    justifyContent:'center',
     width: ScreenUtil.scaleSize(95),
-    height:ScreenUtil.scaleSize(80),
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
   }
 });
