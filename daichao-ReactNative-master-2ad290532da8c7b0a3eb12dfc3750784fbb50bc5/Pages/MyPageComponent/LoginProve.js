@@ -6,10 +6,11 @@ import {
   View,
   TextInput,
   Dimensions,
-  StatusBar, Alert,
+  StatusBar, Alert, DeviceEventEmitter,
 } from 'react-native';
 import NetUtils from "../Common/NetUtils";
 import * as ScreenUtil from "../Common/ScreenUtils";
+import JPushModule from "jpush-react-native/index";
 const {width} = Dimensions.get('window');
 let url = 'http://47.98.148.58/app/user/dcLoginCheckByCode.do';
 export default class LoginProve extends Component{
@@ -22,11 +23,12 @@ export default class LoginProve extends Component{
     super(props);
     this.netUtils=new NetUtils();
     this.state={
-      time:30,
+      time:60,
       inputTexts: new Array(6),
       text:'',
       isRight:1,
-      editable:true
+      editable:true,
+      registrationId:''
     }
   }
   static defaultProps={
@@ -48,6 +50,15 @@ export default class LoginProve extends Component{
   }
   componentDidMount() {
     this.startTimer();
+
+    JPushModule.initPush();
+    JPushModule.getRegistrationID((registrationId) => {
+      console.log("registrationId:"+ registrationId);
+      this.setState({
+        registrationId:registrationId
+      })
+    });
+
   }
   componentWillUnmount() {
     // 如果存在this.timer，则使用clearTimeout清空。
@@ -64,14 +75,12 @@ export default class LoginProve extends Component{
     let inputs = [];
     const {inputTexts} = this.state;
     for (let i = 0; i < 6; i++) {
-      let input = <TextInput
-          key={i}
-          underlineColorAndroid="gray"
-          editable={false}
-          maxLength={1}
-          style={styles.textInput}>
+      let input = <View>
+          <Text
+          key={i}>
         {inputTexts[i]}
-      </TextInput>;
+      </Text>
+      </View>;
       inputs.push(input);
     }
     return inputs;
@@ -79,7 +88,7 @@ export default class LoginProve extends Component{
   textLogin(){
     console.log(this.state.text);
     this.netUtils.fetchNetRepository(url,
-        {"VerificationCode":this.state.text},
+        {"VerificationCode":this.state.text,"registrationId":this.state.registrationId},
     )
         .then(result => {
           console.log(result);
@@ -97,6 +106,8 @@ export default class LoginProve extends Component{
                   }
                 ] //按钮集合
             );
+            this.props.navigation.popToTop();
+            DeviceEventEmitter.emit('LoginSuccess',1);
           }
           if (this.state.isRight === 1){
             Alert.alert(
@@ -142,7 +153,7 @@ export default class LoginProve extends Component{
                         this.textLogin()
                       }}
                   />:
-                  <Text>{this.state.text}</Text>
+                  <View/>
               }
               {this._renderInputs()}
             </View>

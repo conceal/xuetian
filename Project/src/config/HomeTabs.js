@@ -20,6 +20,7 @@ import Picture from '../screens/picture/Picture';
 import Read from '../screens/newRead/Read';
 import Mine from '../screens/mine/Mine';
 import {CommonStyle} from './utils/utils';
+import ComingMovieList from "../screens/movie/comingMovie/ComingMovieList";
 
 export default class HomeTabs extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ export default class HomeTabs extends Component {
               renderSelectedIcon={() => <Icon0 name="movie-roll" size={28} color="#00BFFF"/>}
               onPress={()=> this.setState({selectedTab:'movie'})}
           >
-            <Movie/>
+            <Movie showingMovieList={this.props.showingMovieList} comingMovieList={this.props.comingMovieList} attentionList={this.props.attentionList}/>
           </TabNavigator.Item>
           <TabNavigator.Item
               selected={this.state.selectedTab === 'music'}

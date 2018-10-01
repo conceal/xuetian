@@ -22,7 +22,7 @@ export default class Message extends Component {
     super(props);
     this.utils = new NetUtils;
     this.state = {
-      count: "",
+      count: null,
       dataArray: [],
       login: false
     }
@@ -60,8 +60,8 @@ export default class Message extends Component {
             dataArray: datas,
             login: result.data.state
           });
-          data = "";
-          datas = "";
+          data = null;
+          datas = null;
         })
         .catch(error => {
           this.setState({
@@ -183,12 +183,9 @@ export default class Message extends Component {
           </View>
 
         </View>
-
-        <View style={{backgroundColor: 'gray', height: 1, width: width}}></View>
       </View>
 
     }
-
   };
 }
 const styles = StyleSheet.create({
@@ -220,7 +217,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'red',
-    width: ScreenUtils.scaleSize(150),
+    width: 75,
     height: ScreenUtils.scaleSize(136),
   },
   wholeview: {

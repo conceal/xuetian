@@ -7,12 +7,11 @@ import {
   TouchableOpacity,
   TextInput,
   Dimensions,
-  Platform,
-  DeviceEventEmitter, Alert
+  DeviceEventEmitter,
+  Alert
 } from 'react-native';
 import * as ScreenUtils from "../../Common/ScreenUtils";
 let width = Dimensions.get('window');
-let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
 import Icon1 from "react-native-vector-icons/Ionicons";
 import NetUtils from "../../Common/NetUtils";
 let url = 'http://47.98.148.58/app/user/changeNickName.do';
@@ -68,6 +67,21 @@ export default class Change_Name extends Component {
           })
         })
   }
+  _Load(){
+    if(this.state.text === ""||this.state.text === null){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入昵称", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.onLoad()
+    }
+  }
 
   render() {
     return (
@@ -80,11 +94,10 @@ export default class Change_Name extends Component {
                 style={{flexDirection:'row', alignItems: 'center', marginLeft: 16, height: 25,}}
                 onPress={() => this.props.navigation.pop()}>
               <Icon1 name="ios-arrow-back" size={30} color={'black'} />
-              <Text style={{fontSize: 17, marginLeft:5, color: 'black'}}>设置</Text>
             </TouchableOpacity>
-            <Text style={{fontSize:17, fontWeight: 'bold'}}>修改昵称</Text>
+            <Text style={{color:'black',fontSize:ScreenUtils.setSpText(18), fontWeight: 'bold'}}>修改昵称</Text>
             <TouchableOpacity
-                onPress={()=> this.onLoad()}
+                onPress={()=> this._Load()}
             >
               <Text style={{color:'black',fontSize:ScreenUtils.setSpText(18),marginRight:ScreenUtils.scaleSize(25)}}>完成</Text>
             </TouchableOpacity>
@@ -93,8 +106,9 @@ export default class Change_Name extends Component {
               style={styles.input}
               placeholder='请输入昵称'
               clearButtonMode='always'
+              maxLength={10}
               underlineColorAndroid='transparent'
-              onChangeText={(text) => {this.setState({text});}}
+              onChangeText={(text) => {this.setState({text})}}
           />
         </View>
     );
@@ -117,7 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: Platform.OS === 'ios' ?  44 : 62,
+    height:60,
     backgroundColor: 'white',
     borderBottomWidth: 0.3,
     borderBottomColor: 'gray',

@@ -5,7 +5,8 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  StatusBar, DeviceEventEmitter
+  StatusBar,
+  DeviceEventEmitter
 } from 'react-native';
 import * as ScreenUtils from "../Common/ScreenUtils";
 import NetUtils from "../Common/NetUtils";
@@ -22,7 +23,8 @@ export default class Setting extends Component {
       Data:"",
       nickName:"",
       imgUrl:'',
-      phoneNum:''
+      phoneNum:'',
+      isRefresh:false
     }
   }
   static navigationOptions = ({navigation}) => ({
@@ -40,8 +42,8 @@ export default class Setting extends Component {
     }
   });
   state = {
-    avatarSource: "",
-    videoSource: ""
+    avatarSource: null,
+    videoSource: null
   };
   componentDidMount() {
     DeviceEventEmitter.addListener('NoticeName', (value)=>{
@@ -104,9 +106,17 @@ export default class Setting extends Component {
           avatarSource: source,
         });
         if(response.data === null){
-          alert("没图片")
+          alert("没图片啊兄弟")
         }else {
-          this.utils.fetchNetRepository(url,{"base64Str":response.data,"imgName":response.fileName});
+          this.utils.fetchNetRepository(url,{"base64Str":response.data,"imgName":response.fileName})
+              .then(result => {
+                console.log(result);
+                if (result.code === 0){
+                  this._onLoad();
+                  DeviceEventEmitter.emit('ChangePic',1);
+                }
+              });
+
           console.log(response.fileName);
           console.log(response.data);
         }
@@ -149,7 +159,7 @@ export default class Setting extends Component {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Change_Teltel',{text:this.state.text})}
+              onPress={() => this.props.navigation.navigate('Change_Teltel',{text:this.state.phoneNum})}
               style={styles.row3Style}
           >
             <View style={styles.row4Style}>

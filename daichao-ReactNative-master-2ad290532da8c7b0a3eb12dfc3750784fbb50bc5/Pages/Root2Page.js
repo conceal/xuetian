@@ -28,6 +28,7 @@ import ProvePage from "./MyPageComponent/ForgetComponent/ProvePage";
 import MyWeChat from "./MyPageComponent/SectionComponent/MyWeChat";
 import LoginProve from "./MyPageComponent/LoginProve";
 import MyEarn from "./MyPageComponent/SectionComponent/MyEarn";
+import RewardRules from "./EarnPageComponent/RewardRules";
 
 const Root = StackNavigator({
       Home: {
@@ -44,6 +45,9 @@ const Root = StackNavigator({
       },
       Second: {
         screen: Login,
+      },
+      RewardRules: {
+        screen: RewardRules,
       },
       Fourth: {
         screen: Message,
@@ -115,7 +119,7 @@ const Root = StackNavigator({
       SearchPage: {
         screen: SearchPage,
       },
-      Change_name: {
+      Change_Name: {
         screen: Change_Name,
         navigationOptions: {
           title: '修改昵称'
@@ -127,7 +131,7 @@ const Root = StackNavigator({
           title: '我的奖励'
         }
       },
-      Change_password: {
+      Change_Password: {
         screen: Change_Password,
         navigationOptions: {
           title: '修改密码'

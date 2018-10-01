@@ -4591,6 +4591,10 @@ react-native-htmlview@^0.13.0:
     entities "^1.1.1"
     htmlparser2-without-node-native "^3.9.2"
 
+react-native-image-picker@^0.26.10:
+  version "0.26.10"
+  resolved "http://registry.npm.taobao.org/react-native-image-picker/download/react-native-image-picker-0.26.10.tgz#0bb9ab928984948c67aee0b9e64216bee007a9fc"
+
 react-native-lightbox@^0.8.0:
   version "0.8.0"
   resolved "http://registry.npm.taobao.org/react-native-lightbox/download/react-native-lightbox-0.8.0.tgz#d132e9df458936bae6ae912c309775dce301fffc"
@@ -4608,6 +4612,12 @@ react-native-menu@^0.23.0:
 react-native-orientation@^3.1.3:
   version "3.1.3"
   resolved "http://registry.npm.taobao.org/react-native-orientation/download/react-native-orientation-3.1.3.tgz#d45803841fe94b6cce9acbe904fd5ca191a3711e"
+
+react-native-parallax-scroll-view@^0.21.3:
+  version "0.21.3"
+  resolved "http://registry.npm.taobao.org/react-native-parallax-scroll-view/download/react-native-parallax-scroll-view-0.21.3.tgz#d956ad224ce3b0a2725b80574bcbf688bbeda14e"
+  dependencies:
+    prop-types "^15.6.0"
 
 react-native-router-flux@^4.0.1:
   version "4.0.1"
@@ -4630,6 +4640,10 @@ react-native-safe-area-view@^0.8.0:
   resolved "http://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.8.0.tgz#22d78cb8e8658d04a10cd53c1546e0bc86cb7aea"
   dependencies:
     hoist-non-react-statics "^2.3.1"
+
+react-native-storage@^0.2.2:
+  version "0.2.2"
+  resolved "http://registry.npm.taobao.org/react-native-storage/download/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
 
 react-native-swipeout@^2.2.2:
   version "2.3.6"

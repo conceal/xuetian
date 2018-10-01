@@ -139,6 +139,12 @@ android {
 }
 
 dependencies {
+    implementation project(':rn-splash-screen')
+    implementation project(':react-native-video')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-orientation')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-blur')
     implementation project(':react-native-orientation')
     implementation project(':react-native-video')
     implementation project(':react-native-blur')

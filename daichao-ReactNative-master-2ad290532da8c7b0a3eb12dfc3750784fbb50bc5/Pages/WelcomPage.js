@@ -16,7 +16,7 @@ export default class WelcomePage extends Component{
     super(props);
     this.utils = new NetUtils;
     this.state={
-      img:"",
+      img:' ',
     }
   }
 
@@ -62,7 +62,6 @@ export default class WelcomePage extends Component{
           })
         })
   }
-
 }
 
 const styles = StyleSheet.create({

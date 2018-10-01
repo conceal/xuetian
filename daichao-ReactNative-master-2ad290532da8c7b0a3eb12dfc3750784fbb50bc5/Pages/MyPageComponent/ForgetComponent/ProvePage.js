@@ -24,7 +24,7 @@ export default class Prove extends Component{
     super(props);
     this.netUtils=new NetUtils();
     this.state={
-      time:30,
+      time:60,
       inputTexts: new Array(6),
       text:'',
       istrue:1,
@@ -67,14 +67,12 @@ export default class Prove extends Component{
     let inputs = [];
     const {inputTexts} = this.state;
     for (let i = 0; i < 6; i++) {
-      let input = <TextInput
-          key={i}
-          underlineColorAndroid="gray"
-          editable={false}
-          maxLength={1}
-          style={styles.textInput}>
+      let input = <View style={styles.Inputs}>
+          <Text
+          key={i}>
         {inputTexts[i]}
-      </TextInput>;
+      </Text>
+      </View>
       inputs.push(input);
     }
     return inputs;
@@ -129,7 +127,6 @@ export default class Prove extends Component{
                       ref={(ref) => this._input = ref}
                       autoFocus={true}
                       visible={false}
-                      style={{height: 1, width: 1}}
                       maxLength={6}
                       keyboardType={'numeric'}
                       onChangeText={(text) => {
@@ -143,7 +140,7 @@ export default class Prove extends Component{
                         this.textLogin()
                       }}
                   />:
-                  <Text>{this.state.text}</Text>
+                  <View/>
               }
               {this._renderInputs()}
             </View>
@@ -161,9 +158,7 @@ const styles=StyleSheet.create({
   },
   partOne:{
     flexDirection:'row',
-    justifyContent:'space-around',
-    marginLeft:20,
-    width:width-40,
+    justifyContent:'center',
   },
   Input:{
     borderBottomColor:'gray',
@@ -172,5 +167,14 @@ const styles=StyleSheet.create({
   },
   textInput:{
     width: ScreenUtil.scaleSize(95),
+  },
+  Inputs: {
+    width: ScreenUtil.scaleSize(95),
+    height: ScreenUtil.scaleSize(80),
+    justifyContent: 'center',
+    alignItems:'center',
+    marginHorizontal: 5,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
   }
 });

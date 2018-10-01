@@ -8,7 +8,8 @@ import {
   FlatList,
   Dimensions,
   StatusBar,
-  ActivityIndicator, Modal
+  ActivityIndicator,
+  Modal, TouchableWithoutFeedback, DeviceEventEmitter
 } from 'react-native';
 import * as ScreenUtils from "../../Common/ScreenUtils";
 import NetUtils from '../../Common/NetUtils';
@@ -22,7 +23,7 @@ let URL = 'http://47.98.148.58/app/goods/moreclassification.do';
 let Url = 'http://47.98.148.58/app/goods/clickCount.do';
 let Page=0;
 let imageurl = "";
-export default class Long extends Component {
+export default class Black extends Component {
   constructor(props) {
     super(props);
     this.utils = new NetUtils;
@@ -30,7 +31,7 @@ export default class Long extends Component {
       dataArray: [],
       isLoading: true,
       id: 0,
-      img: "",
+      img: null,
       showFoot:0,
       Refresh:true,
       length:0,
@@ -39,7 +40,8 @@ export default class Long extends Component {
       currentPage:1,
       visible:false,
       FdataUrl:'',
-      FdataPic:''
+      FdataPic:'',
+      url:''
     }
   }
 
@@ -48,7 +50,7 @@ export default class Long extends Component {
   onLoad(url,page) {
     const {params} = this.props.navigation.state;
     this.utils.fetchNetRepository(url,
-        {"tabId":params.tabId,"pageNo":page},
+        {"tabId":params.tab2Id,"pageNo":page},
     )
         .then(result => {
           console.log(result);
@@ -59,7 +61,8 @@ export default class Long extends Component {
             Page = parseInt(length/10)+1;
             this.setState({
               First:false,
-              totalPage:Page
+              totalPage:Page,
+              url:result.data.headerImg.style_url
             })
           }
           console.log("进来没有");
@@ -79,15 +82,23 @@ export default class Long extends Component {
             foot = 1;
           }
 
-          this.setState({
-            dataArray: this.state.dataArray.concat(datas),
-            isLoading: false,
-            img: imageurl,
-            showFoot:foot,
-          });
-          console.log("进来了？");
+          if (page === 1){
+            this.setState({
+              dataArray: datas,
+              isLoading: false,
+              img: imageurl,
+              showFoot:foot,
+            });
+          } else {
+            this.setState({
+              dataArray: this.state.dataArray.concat(datas),
+              isLoading: false,
+              img: imageurl,
+              showFoot:foot,
+            });
+          }
 
-          if(this.state.currentPage%2 === 0){
+          if(page %2 === 0){
             console.log("111111111111");
             this.setModalVisible(true);
             this.setState({
@@ -96,8 +107,8 @@ export default class Long extends Component {
             })
           }
 
-          data = "";
-          datas = "";
+          data = null;
+          datas = null;
         })
 
         .catch(error => {
@@ -109,7 +120,15 @@ export default class Long extends Component {
 
   componentDidMount() {
     this.onLoad(url);
-    /*this.onPush();*/
+    this.changeTab2 = DeviceEventEmitter.addListener('ChangeTab2', (value)=>{
+      //这里面是要调用的方法，比如：刷新
+      //value:是下面页面在 通知 时 ，所传递过来的参数
+      this.onLoad(url,1);
+      this._flatList.scrollToIndex({viewPosition: 0, index: 0});
+    });
+  }
+  componentWillUnmount(){
+    this.changeTab2.remove();
   }
 
   setModalVisible(visible) {
@@ -127,10 +146,16 @@ export default class Long extends Component {
       </View>
     }else {
       return<View style={{flex:1}}>
-        <Image source={{uri:this.state.img}}
-               style={styles.ImageView}
-        />
+        <TouchableWithoutFeedback
+            onPress={()=>this.props.navigation.navigate('WebPage', {url: this.state.url, ...this.props})}
+        >
+          <Image source={{uri:this.state.img}}
+                 style={styles.ImageView}
+          />
+        </TouchableWithoutFeedback>
+
         <FlatList
+            ref={(flatList)=>this._flatList = flatList}
             renderItem={this.ViewList}
             data={this.state.dataArray}
             ListFooterComponent={this._renderFooter.bind(this)}
@@ -224,7 +249,7 @@ export default class Long extends Component {
   onPush(id) {
     const {params} = this.props.navigation.state;
     this.utils.fetchNetRepository(Url,
-        {"tabId": params.tabId, "gdsId": id},
+        {"tabId": params.tab2Id, "gdsId": id},
     )
         .catch(error => {
           this.setState({
@@ -232,6 +257,18 @@ export default class Long extends Component {
           })
         })
   }
+  CheckTab= ({item}) =>{
+    if (item.value.commoditytab === "" || item.value.commoditytab === null){
+      return<View/>
+    } else {
+      return<View style={styles.label}>
+        <Text style={{
+          fontSize: ScreenUtils.setSpText(11),
+          color: '#F3713D'
+        }}>{item.value.commoditytab}</Text>
+      </View>
+    }
+  };
 
   ViewList = ({item}) => {
     return (
@@ -255,12 +292,7 @@ export default class Long extends Component {
                       fontSize: ScreenUtils.setSpText(19),
                       paddingBottom: 7
                     }}>{item.value.commodityName}</Text>
-                    <View style={styles.label}>
-                      <Text style={{
-                        fontSize: ScreenUtils.setSpText(11),
-                        color: '#F3713D'
-                      }}>{item.value.commoditytab}</Text>
-                    </View>
+                    {this.CheckTab({item})}
                   </View>
                   <Text>{item.value.commodityintro}</Text>
                 </View>

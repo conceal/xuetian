@@ -13,7 +13,7 @@ import NetUtils from "../../Common/NetUtils";
 let width=Dimensions.get('window').width;
 let url = 'http://47.98.148.58/app/user/showHelpDetail.do';
 
-export default class Message extends Component{
+export default class DetailHelp extends Component{
   static navigationOptions =  ({ navigation }) =>({
     title: navigation.state.params.title,
     headerTitleStyle:{

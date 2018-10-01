@@ -6,12 +6,14 @@ import {
   View,
   TextInput,
   Picker,
-  Dimensions, StatusBar
+  Dimensions,
+  StatusBar,
+  Alert,
 } from 'react-native';
 import NetUtils from "../../Common/NetUtils";
 const {width} = Dimensions.get('window');
-let url = 'http://47.98.148.58/app/user/enrollTel.do';
-export default class Register extends Component{
+let url = 'http://47.98.148.58/app/user/enrollTelForgetPwd.do';
+export default class FindBackPage extends Component{
   constructor(props){
     super(props);
     this.netUtils=new NetUtils();
@@ -20,6 +22,13 @@ export default class Register extends Component{
     }
   }
   static navigationOptions={
+    headerTitleStyle: {
+      flex: 1,
+      textAlign: 'center'
+    },
+    headerRight: (
+        <View/>
+    ),
     headerStyle:{
       marginTop:StatusBar.currentHeight
     }
@@ -30,12 +39,45 @@ export default class Register extends Component{
     click:false
   };
   Send(){
-    this.props.navigation.navigate('Prove',{text:this.state.text},{click:this.state.click});
+    this.props.navigation.navigate('ProvePage',{text:this.state.text},{click:this.state.click});
+  }
+  _CheckProve(Num) {
+    const correctnum =/^1(3|4|5|7|8)\d{9}$/;
+    let regNum = new RegExp(correctnum);
+    if (!regNum.test(Num)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的手机号", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.textLogin()
+    }
   }
   textLogin(){
     this.netUtils.fetchNetRepository(url,
         {"telNumber":this.state.text},
     )
+        .then(result => {
+          console.log(result);
+          if(result.code === 0){
+            this.Send();
+          }else {
+            Alert.alert(
+                '提示', //提示标题
+                "手机号未注册", //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
+        })
   }
   render(){
     return(
@@ -46,7 +88,7 @@ export default class Register extends Component{
                 onValueChange={(num)=>this.setState({num:num})}
                 style={styles.picker}
                 mode='dropdown'
-                itemStyle={{height:50,}}
+                itemStyle={{height:50}}
             >
               <Picker.Item label='+86' value={'移动'} style={{fontSize:5}}/>
               <Picker.Item label='+10' value={'联通'} style={{fontSize:5}}/>
@@ -55,7 +97,7 @@ export default class Register extends Component{
             <TextInput
                 placeholder={'手机号'}
                 maxLength={11}
-                style={{width:width-50, height: 50, backgroundColor:'white'}}
+                style={{width:width-50, height:50, backgroundColor:'white'}}
                 underlineColorAndroid={'transparent'}
                 keyboardType={'numeric'}
                 onChangeText={(text)=>this.setState({text:text,click:true})}
@@ -63,8 +105,19 @@ export default class Register extends Component{
           </View>
           <TouchableOpacity
               onPress={()=>{
-                this.Send();
-                this.textLogin()
+                if (this.state.text !== null&&this.state.text !== ""){
+                  this._CheckProve(parseInt(this.state.text))
+                } else {
+                  Alert.alert(
+                      '提示', //提示标题
+                      "请输入手机号", //提示内容
+                      [
+                        {
+                          text: '确定'
+                        }
+                      ] //按钮集合
+                  );
+                }
               }}
               style={styles.touch}
           >
@@ -82,9 +135,9 @@ const styles=StyleSheet.create({
   },
   container:{
     flexDirection:'row',
-    height: 50,
-    marginTop:20,
-    marginBottom:40,
+    height:50,
+    paddingTop:10,
+    paddingBottom:40,
   },
   picker:{
     width:80,

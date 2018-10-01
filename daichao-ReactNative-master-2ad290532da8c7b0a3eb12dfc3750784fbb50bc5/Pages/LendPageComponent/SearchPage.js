@@ -6,12 +6,11 @@ import {
   Image,
   Text,
   StatusBar,
-  TouchableOpacity,
+  TouchableOpacity, TouchableWithoutFeedback,
 } from 'react-native';
 
 import * as ScreenUtils from "../Common/ScreenUtils";
 import Swiper from 'react-native-swiper';
-import SearchInputPart from "./SearchInputPart";
 import NetUtils from "../Common/NetUtils";
 
 let Dimensions = require('Dimensions');
@@ -24,15 +23,14 @@ export default class SearchPage extends Component {
     super(props);
     this.utils = new NetUtils;
     this.state = {
-      text: "",
+      text: null,
       par: 0,
       dataArray: [],
-      datas:[],
-      Datas:[],
-      img1:'',
-      img2:'',
-      url1:'',
-      url2:''
+      DataArray: [],
+      img1: '',
+      img2: '',
+      url1: '',
+      url2: ''
     }
   }
 
@@ -53,26 +51,45 @@ export default class SearchPage extends Component {
         .then(result => {
           console.log(result);
           let re = result.code;
-          let data = result.data.commodityList;
-          let datas = [];
-          let i = 0;
-          data.map(function (item) {
-            datas.push({
-              key: i,
-              value: item,
+          if (result.code === 0) {
+            let data = result.data.commodityList;
+            let datas = [];
+            let i = 0;
+            data.map(function (item) {
+              datas.push({
+                key: i,
+                value: item,
+              });
+              i++;
             });
-            i++;
-          });
-          this.setState({
-            dataArray: datas,
-            par: re,
-            img1:result.data.banner[0].banner_img_url,
-            img2:result.data.banner[1].banner_img_url,
-            url1:result.data.banner[0].banner_url,
-            url2:result.data.banner[1].banner_url,
-          });
-          data = "";
-          datas = "";
+            this.setState({
+              dataArray: datas,
+              par: re,
+            });
+            data = null;
+            datas = null;
+          } else {
+            let Data = result.data.commodityList;
+            let Datas = [];
+            let i = 0;
+            Data.map(function (item) {
+              Datas.push({
+                key: i,
+                value: item,
+              });
+              i++;
+            });
+            this.setState({
+              DataArray: Datas,
+              par: re,
+              img1: result.data.banner[0].banner_img_url,
+              img2: result.data.banner[1].banner_img_url,
+              url1: result.data.banner[0].banner_url,
+              url2: result.data.banner[1].banner_url,
+            });
+            Data = null;
+            Datas = null;
+          }
         })
 
         .catch(error => {
@@ -81,34 +98,41 @@ export default class SearchPage extends Component {
           })
         })
   }
+
   _keyExtractor = (item, index) => index.toString();
 
   addItem() {
-    let dataArray = this.state.dataArray;
-    dataArray.length=4;
-    return dataArray.map((item) => {
-      return <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('WebPage', {url: item.value.url, ...this.props,})
-          }}
-      >
-        <View style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: width / 5,
-          height: ScreenUtils.scaleSize(58),
-          backgroundColor: 'white'
-        }}>
-          <Text style={styles.Name}>{item.value.gds_name}</Text>
-        </View>
-      </TouchableOpacity>
-    })
-
+    if (this.state.par === 1) {
+      let dataArray = this.state.DataArray;
+      dataArray.length = 4;
+      return dataArray.map((item) => {
+        return <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('WebPage', {url: item.value.gds_url, ...this.props,})
+            }}
+        >
+          <View style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: width / 5,
+            height: ScreenUtils.scaleSize(58),
+            backgroundColor: 'white'
+          }}>
+            <Text
+                numberOfLines={1}
+                ellipsizeMode='tail'
+                style={styles.Name}>
+              {item.value.gds_name}</Text>
+          </View>
+        </TouchableOpacity>
+      })
+    }
   };
 
   render() {
     const {params} = this.props.navigation.state;
     if (this.state.par === 0) {
+      console.log(this.state.dataArray);
       return (
           <View style={styles.container}>
             <StatusBar
@@ -117,7 +141,6 @@ export default class SearchPage extends Component {
             <FlatList
                 renderItem={this.ViewList}
                 data={this.state.dataArray}
-                keyExtractor={(item, index) => index}
             />
           </View>
       )
@@ -162,9 +185,16 @@ export default class SearchPage extends Component {
                     height: ScreenUtils.scaleSize(14)
                   }}
               >
-                <Image resizemode={'contain'} style={styles.image} source={{uri:this.state.img1}}/>
-                <Image resizemode={'contain'} style={styles.image}
-                       source={{uri:this.state.img2}}/>
+                <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate('WebPage', {url: this.state.url1, ...this.props})}
+                >
+                  <Image resizemode={'contain'} style={styles.image} source={{uri: this.state.img1}}/>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate('WebPage', {url: this.state.url2, ...this.props})}
+                >
+                  <Image resizemode={'contain'} style={styles.image} source={{uri: this.state.img2}}/>
+                </TouchableWithoutFeedback>
               </Swiper>
             </View>
             <View style={styles.textStyle}>
@@ -190,6 +220,19 @@ export default class SearchPage extends Component {
 
   }
 
+  Check = ({item}) => {
+    if (item.value.red_tab === "" || item.value.red_tab === null) {
+      return <View/>
+    } else {
+      return <View style={styles.label}>
+        <Text style={{
+          fontSize: ScreenUtils.setSpText(11),
+          color: '#F3713D'
+        }}>{item.value.red_tab}</Text>
+      </View>
+    }
+  };
+
   ViewList = ({item}) => {
     return (
         <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 10}}>
@@ -210,12 +253,7 @@ export default class SearchPage extends Component {
                       fontSize: ScreenUtils.setSpText(19),
                       paddingBottom: 7
                     }}>{item.value.commodityName}</Text>
-                    <View style={styles.label}>
-                      <Text style={{
-                        fontSize: ScreenUtils.setSpText(11),
-                        color: '#F3713D'
-                      }}>{item.value.red_tab}</Text>
-                    </View>
+                    {this.Check({item})}
                   </View>
                   <Text>{item.value.gds_intro}</Text>
                 </View>
@@ -322,8 +360,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  Name:{
-    fontSize:ScreenUtils.setSpText(15)
+  Name: {
+    fontSize: ScreenUtils.setSpText(15)
   }
 
 

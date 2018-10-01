@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import * as ScreenUtils from "../Common/ScreenUtils";
 import NetUtils from '../Common/NetUtils';
+import JPushModule from "jpush-react-native/index";
 
 let url = 'http://47.98.148.58/app/user/bankLading.do';
 let URL = 'http://47.98.148.58/app/user/SMSLading.do';
@@ -41,18 +42,28 @@ export default class Login extends Component {
       result: '',
       textTel: '',
       textPassword: '',
-      warn:true,
-      we:1
+      we:1,
+      registrationId:''
     }
   }
 
 
+  componentDidMount(){
+    JPushModule.initPush();
+    JPushModule.getRegistrationID((registrationId) => {
+      console.log("registrationId:"+ registrationId);
+      this.setState({
+        registrationId:registrationId
+      })
+    });
+  }
   onLoad() {
     this.netUtils.fetchNetRepository(url,
-        {"userTel": this.state.textTel, "password": this.state.textPassword},
+        {"userTel": this.state.textTel, "password": this.state.textPassword,"registrationId":this.state.registrationId},
     )
         .then(result => {
           console.log(result);
+
 
           if(result.code===0){
             Alert.alert(
@@ -92,10 +103,25 @@ export default class Login extends Component {
   }
 
   textLogin() {
-    this.props.navigation.navigate('LoginProve',{text:this.state.textTel});
     this.netUtils.fetchNetRepository(URL,
         {"telNumber": this.state.textTel},
     )
+        .then(result => {
+          console.log(result);
+          if(result.code === 0){
+            this.props.navigation.navigate('LoginProve',{text:this.state.textTel});
+          }else {
+            Alert.alert(
+                '提示', //提示标题
+                '手机号未注册', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
+        })
         .catch(error => {
           this.setState({
             result: JSON.stringify(error),
@@ -103,31 +129,42 @@ export default class Login extends Component {
         });
   }
 
-  /*_Check(input) {
-      const correct =/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$/;
-      let reg = new RegExp(correct);
-      if (!reg.test(input)){
-          console.log(this.state.warn);
-          this.setState({
-              warn:true
-          });
-      }else {
-          this.setState({
-              warn:false
-          });
-          console.log(this.state.warn);
-      }
+  _CheckProve(Num) {
+    const correctnum =/^1(3|4|5|7|8)\d{9}$/;
+    let regNum = new RegExp(correctnum);
+    if (!regNum.test(Num)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的手机号", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.textLogin()
+    }
   }
-
-  _Warning(){
-      if (!this.state.warn){
-          return <View>
-              <Text style={styles.warnStyle}>请输入正确的手机号</Text>
-          </View>
-      } else {
-          return <View/>
-      }
-  }*/
+  _CheckNum(Num,Password) {
+    const correctNum =/^1(3|4|5|7|8)\d{9}$/;
+    const correctPass =/^[a-zA-Z0-9]{6,21}$/;
+    let regNum = new RegExp(correctNum);
+    let regPass = new RegExp(correctPass);
+    if (!regNum.test(Num)||!regPass.test(Password)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的账号和密码", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.onLoad()
+    }
+  }
 
   StateTest() {
     if (this.state.One) {
@@ -139,7 +176,7 @@ export default class Login extends Component {
                   onValueChange={(num) => this.setState({num: num})}
                   style={styles.picker}
                   mode='dropdown'
-                  itemStyle={{height:ScreenUtils.scaleSize(120)}}
+                  itemStyle={{height:50}}
               >
                 <Picker.Item label='+86' value={'移动'} style={{fontSize: 5}}/>
                 <Picker.Item label='+10' value={'联通'} style={{fontSize: 5}}/>
@@ -149,7 +186,7 @@ export default class Login extends Component {
                   placeholder={'输入手机号'}
                   maxLength={11}
                   underline={true}
-                  style={{width: width - 150,height:ScreenUtils.scaleSize(120), backgroundColor: 'white'}}
+                  style={{width: width - 150, height:50, backgroundColor: 'white'}}
                   underlineColorAndroid={'#F1F1F1'}
                   keyboardType={'numeric'}
                   onChangeText={(textTel) => {this.setState({textTel});}}
@@ -170,16 +207,18 @@ export default class Login extends Component {
               }}>密码</Text>
               <TextInput
                   placeholder={'输入密码'}
-                  style={{width: width - 180, backgroundColor: 'white', height: 50}}
+                  style={{width: width - 180, height:50,  backgroundColor: 'white'}}
                   underlineColorAndroid={'#F1F1F1'}
                   keyboardType={'default'}
-                  onChangeText={(textPassword) => {this.setState({textPassword});}}
-
+                  onChangeText={(textPassword) => {this.setState({textPassword})}}
+                  secureTextEntry={true}
               />
             </View>
             <TouchableOpacity
                 onPress={() => {
-                  this.onLoad()
+                  let str = this.state.textPassword;
+                  let Str = str.replace(/\"/g,"");
+                  this._CheckNum(parseInt(this.state.textTel),Str);
                 }}
                 style={styles.touch}
             >
@@ -197,7 +236,7 @@ export default class Login extends Component {
                   onValueChange={(num) => this.setState({num: num})}
                   style={styles.picker}
                   mode='dropdown'
-                  itemStyle={{height:ScreenUtils.scaleSize(120)}}
+                  itemStyle={{height:50}}
               >
                 <Picker.Item label='+86' value={'移动'} style={{fontSize: 5}}/>
                 <Picker.Item label='+10' value={'联通'} style={{fontSize: 5}}/>
@@ -206,17 +245,31 @@ export default class Login extends Component {
               <TextInput
                   placeholder={'输入手机号'}
                   maxLength={11}
-                  style={{width: width - 150, height: ScreenUtils.scaleSize(120), backgroundColor: 'white'}}
+                  style={{width: width - 150, hight:50, backgroundColor: 'white'}}
                   underlineColorAndroid={'#F1F1F1'}
                   keyboardType={'numeric'}
                   onChangeText={(textTel) => {
-                    this.setState({textTel})
+                    this.setState({
+                      textTel:textTel
+                    });
                   }}
               />
             </View>
             <TouchableOpacity
                 onPress={() => {
-                  this.textLogin()
+                  if (this.state.text !== null&&this.state.text !== ""){
+                    this._CheckProve(parseInt(this.state.textTel))
+                  } else {
+                    Alert.alert(
+                        '提示', //提示标题
+                        "请输入手机号", //提示内容
+                        [
+                          {
+                            text: '确定'
+                          }
+                        ] //按钮集合
+                    );
+                  }
                 }}
                 style={styles.touch}
             >
@@ -250,12 +303,9 @@ export default class Login extends Component {
   render() {
     return (
         <TouchableOpacity
-            style={styles.container}
             activeOpacity={1}
-            onPress={()=>  {
-              Keyboard.dismiss();
-              console.log("TouchSuccess")
-            }}
+            style={styles.container}
+            onPress={()=>Keyboard.dismiss()}
         >
           <StatusBar
               backgroundColor='white'
@@ -303,6 +353,7 @@ export default class Login extends Component {
             ><Text style={{paddingLeft: 200, fontSize: ScreenUtils.setSpText(14)}}>新用户注册</Text>
             </TouchableOpacity>
           </View>
+
         </TouchableOpacity>
     );
   }
@@ -342,13 +393,6 @@ const styles = StyleSheet.create({
     marginBottom: ScreenUtils.scaleSize(10),
     backgroundColor: 'white'
   },
-  Call: {
-    flexDirection: 'row',
-    borderBottomColor: 'gray',
-    marginBottom: ScreenUtils.scaleSize(10),
-    height: ScreenUtils.scaleSize(120),
-
-  },
   touch: {
     backgroundColor: '#FFE059',
     borderRadius: ScreenUtils.scaleSize(10),
@@ -359,12 +403,14 @@ const styles = StyleSheet.create({
     marginTop: ScreenUtils.scaleSize(40)
   },
   picker: {
-    marginRight: ScreenUtils.scaleSize(60),
+    height: 50,
+    justifyContent:'center',
     width: ScreenUtils.scaleSize(160),
-    height: ScreenUtils.scaleSize(50),
+    marginRight: ScreenUtils.scaleSize(60),
   },
   warnStyle:{
     color:'red',
     fontSize:ScreenUtils.setSpText(5)
   }
+
 });

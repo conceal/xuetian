@@ -19,7 +19,6 @@
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -27,7 +26,6 @@
 		1DB13C968DFC4F6FA24D8871 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DC66081C048C7B7CA076F /* EvilIcons.ttf */; };
 		2AB5A1AF26AC4D41B2D5C35E /* libRNCookieManagerIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779A1FB7A0094E06BB15C875 /* libRNCookieManagerIOS.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */; };
@@ -49,7 +47,8 @@
 		56BCC59242914742B96FE0D6 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CFF845D3E04DDFBB8D5C3A /* CoreFoundation.framework */; };
 		5901541C390E4A0EB236126D /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EE5A32BE94D40319B50DF95 /* FontAwesome5_Brands.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		75DC45AF2135447F001EBDBB /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 75DC458A2135447F001EBDBB /* bundle */; };
+		755B6304215E7B5D008FE00F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 755B62DD215E7B5D008FE00F /* Images.xcassets */; };
+		755B6374215E7D1B008FE00F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 755B634D215E7D1B008FE00F /* bundle */; };
 		75DC45E72135471E001EBDBB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DC45E62135471E001EBDBB /* SystemConfiguration.framework */; };
 		75DC45E921354728001EBDBB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DC45E821354728001EBDBB /* CoreGraphics.framework */; };
 		75DC45EB21354731001EBDBB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DC45EA21354731001EBDBB /* CoreTelephony.framework */; };
@@ -390,7 +389,6 @@
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Mld/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Mld/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Mld/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Mld/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Mld/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
@@ -406,7 +404,8 @@
 		5524B2171E5D4C5BA0E35CC3 /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6282A450209D40BBB74F34C2 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		75DC458A2135447F001EBDBB /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
+		755B62DD215E7B5D008FE00F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Mld/Images.xcassets; sourceTree = "<group>"; };
+		755B634D215E7D1B008FE00F /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		75DC45E62135471E001EBDBB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		75DC45E821354728001EBDBB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		75DC45EA21354731001EBDBB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -633,14 +632,14 @@
 		13B07FAE1A68108700A75B9A /* Mld */ = {
 			isa = PBXGroup;
 			children = (
+				755B634D215E7D1B008FE00F /* bundle */,
 				75E2214521424C7100829264 /* Mld.entitlements */,
 				75DC465821355050001EBDBB /* sharemodule.m */,
 				75DC463321355024001EBDBB /* sharemodule.h */,
 				75DC45F421354B95001EBDBB /* UMSocial */,
-				75DC458A2135447F001EBDBB /* bundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				755B62DD215E7B5D008FE00F /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -1040,6 +1039,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = GVCC7N2J83;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -1430,7 +1430,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				B646B99154924EB58A8252E0 /* Entypo.ttf in Resources */,
 				1DB13C968DFC4F6FA24D8871 /* EvilIcons.ttf in Resources */,
@@ -1445,10 +1444,11 @@
 				393A093335854B15A9197D36 /* MaterialIcons.ttf in Resources */,
 				CFE60069F6F641C99775AF71 /* Octicons.ttf in Resources */,
 				7FA66F832E2D4E1FBF170ED1 /* SimpleLineIcons.ttf in Resources */,
-				75DC45AF2135447F001EBDBB /* bundle in Resources */,
+				755B6304215E7B5D008FE00F /* Images.xcassets in Resources */,
 				75DC461721354B95001EBDBB /* UMSocialSDKPromptResources.bundle in Resources */,
 				3EB93C452F264D26815DCFE0 /* Zocial.ttf in Resources */,
 				75DC461421354B95001EBDBB /* UMSocialSDKResources.bundle in Resources */,
+				755B6374215E7D1B008FE00F /* bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1456,7 +1456,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1570,7 +1569,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = GVCC7N2J83;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1618,7 +1617,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = GVCC7N2J83;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..",
@@ -1660,11 +1659,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Mld/Mld.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiaojiang Liu (GVCC7N2J83)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = GVCC7N2J83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
@@ -1705,8 +1704,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumei.Demo;
 				PRODUCT_NAME = Mld;
-				PROVISIONING_PROFILE = "9a3af538-3c9b-4496-977a-a6413bfb2fe1";
-				PROVISIONING_PROFILE_SPECIFIER = ad_hoc;
+				PROVISIONING_PROFILE = "e1cbe306-b806-4550-8a5e-74dfc2d9894c";
+				PROVISIONING_PROFILE_SPECIFIER = Distribute;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1716,10 +1715,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Mld/Mld.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xiaojiang Liu (GVCC7N2J83)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = GVCC7N2J83;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
@@ -1760,8 +1759,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumei.Demo;
 				PRODUCT_NAME = Mld;
-				PROVISIONING_PROFILE = "9a3af538-3c9b-4496-977a-a6413bfb2fe1";
-				PROVISIONING_PROFILE_SPECIFIER = ad_hoc;
+				PROVISIONING_PROFILE = "e1cbe306-b806-4550-8a5e-74dfc2d9894c";
+				PROVISIONING_PROFILE_SPECIFIER = Distribute;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1979,6 +1978,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -6,7 +6,6 @@ import {
   Easing,
   StyleSheet,
 } from 'react-native'
-import * as ScreenUtils from "./ScreenUtils";
 
 export default class ScrollVertical extends Component {
   static defaultProps = {
@@ -89,7 +88,10 @@ export default class ScrollVertical extends Component {
     return (
         <View key={index}
               style={[{ justifyContent: 'center', height: this.state.scrollHeight}, this.props.scrollStyle]}>
-          <Text style={[styles.kb_text_c, this.props.textStyle]}>{kbItem.content}</Text>
+          <Text
+              numberOfLines={1}
+              ellipsizeMode='tail'
+              style={[styles.kb_text_c, this.props.textStyle]}>{kbItem.content}</Text>
         </View>
     )
   }

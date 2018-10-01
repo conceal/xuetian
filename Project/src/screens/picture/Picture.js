@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, FlatList, Platform, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Platform, ActivityIndicator} from 'react-native';
 import HttpUtils from '../../config/HttpUtils';
 import NavigationBar from "../../config/NavigationBar";
 import {pictureData} from '../../config/utils/Services';
@@ -70,7 +70,9 @@ export default class Picture extends Component {
                   backgroundColor: '#151C28'
                 }}
             />
-            <PictureCell pictureData={this.state.pictureData} />
+            <ScrollView>
+              <PictureCell pictureData={this.state.pictureData} />
+            </ScrollView>
           </View>
       );
     }

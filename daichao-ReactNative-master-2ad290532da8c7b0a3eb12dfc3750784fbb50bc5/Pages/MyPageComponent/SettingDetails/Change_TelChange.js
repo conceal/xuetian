@@ -6,7 +6,9 @@ import {
   View,
   TextInput,
   Picker,
-  Dimensions, StatusBar
+  Dimensions,
+  StatusBar,
+  Alert
 } from 'react-native';
 import NetUtils from "../../Common/NetUtils";
 const {width} = Dimensions.get('window');
@@ -43,8 +45,30 @@ export default class Change_TelChange extends Component{
   textLogin(){
     this.netUtils.fetchNetRepository(url,
         {"telNumber":this.state.text},
-    )
+    ).then(result => {
+      console.log(result);
+      if(result.code === 0){
+        this.Send()
+      }
+    })
 
+  }
+  _CheckNum(Num) {
+    const correctNum =/^1(3|4|5|7|8)\d{9}$/;
+    let regNum = new RegExp(correctNum);
+    if (!regNum.test(Num)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的账号和密码", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.textLogin()
+    }
   }
   render(){
     return(
@@ -55,6 +79,7 @@ export default class Change_TelChange extends Component{
                 onValueChange={(num)=>this.setState({num:num})}
                 style={styles.picker}
                 mode='dropdown'
+                itemStyle={{height: 50}}
             >
               <Picker.Item label='+86' value={'移动'} style={{fontSize:5}}/>
               <Picker.Item label='+10' value={'联通'} style={{fontSize:5}}/>
@@ -63,7 +88,7 @@ export default class Change_TelChange extends Component{
             <TextInput
                 placeholder={'手机号'}
                 maxLength={11}
-                style={{width:width-50,backgroundColor:'white'}}
+                style={{width:width-50, height:50, backgroundColor:'white'}}
                 underlineColorAndroid={'transparent'}
                 keyboardType={'numeric'}
                 onChangeText={(text)=>this.setState({text:text,click:true})}
@@ -71,8 +96,19 @@ export default class Change_TelChange extends Component{
           </View>
           <TouchableOpacity
               onPress={()=>{
-                this.Send();
-                this.textLogin()
+                if (this.state.text !== null&&this.state.text !== ""){
+                  this._CheckNum(parseInt(this.state.text))
+                } else {
+                  Alert.alert(
+                      '提示', //提示标题
+                      "请输入手机号", //提示内容
+                      [
+                        {
+                          text: '确定'
+                        }
+                      ] //按钮集合
+                  );
+                }
               }}
               style={styles.touch}
           >
@@ -89,12 +125,14 @@ const styles=StyleSheet.create({
     backgroundColor:'#F3F4F6'
   },
   container:{
+    height: 50,
     flexDirection:'row',
     paddingTop:20,
     paddingBottom:40,
   },
   picker:{
     width:80,
+    height:50,
     justifyContent:'center',
     backgroundColor:'white',
     color:'gray',

@@ -6,7 +6,7 @@ import {
   FlatList,
   Text,
   Dimensions,
-  StatusBar
+  StatusBar, Alert
 } from 'react-native';
 import * as ScreenUtils from "../../Common/ScreenUtils";
 import NetUtils from "../../Common/NetUtils";
@@ -35,14 +35,27 @@ export default class Message extends Component{
       data:[]
     })
   }
+
   componentDidMount(){
     this.onLoad();
   }
+
   onLoad() {
     this.utils.fetchNetRepository(url)
         .then(result => {
           console.log(result);
           let data = result.data;
+          if (data.length === 0){
+            Alert.alert(
+                '提示', //提示标题
+                '暂无邀请用户，请再接再厉', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
           let datas = [];
           let i = 0;
           data.map(function (item) {
@@ -55,8 +68,8 @@ export default class Message extends Component{
           this.setState({
             data: datas,
           });
-          data = "";
-          datas = "";
+          data = null;
+          datas = null;
         })
 
         .catch(error => {

@@ -10,62 +10,33 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, ScrollView, FlatList, ActivityIndicator} from 'react-native';
 import ComingMovieCell from './ComingMovieCell';
 import AttentionMovieCell from './AttentionMovieCell';
-import HttpUtils from "../../../config/HttpUtils";
-import {comingMovies} from "../../../config/utils/Services";
 
 export default class ComingMovieList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      comingMovieList:[],
-      attentionList:[],
-      isLoading:true,
+    this.state={
+      data: this.props.comingMovieList.slice(0,9),
+      count:19,
     }
   }
 
-  componentDidMount() {
-    this.load();
-  }
-
-  load() {
-    HttpUtils.get(comingMovies())
-        .then((response)=> {
-          this.setState({
-            attentionList:response.attention,
-            comingMovieList: response.moviecomings,
-            isLoading:false,
-          });
-        }).catch((error)=> {
-      console(error);
-    });
-
-  }
 
   render() {
-    let attentionArray = this.state.attentionList;
-    let comingArray = this.state.comingMovieList;
-    if (this.state.isLoading) {
-      return (
-          <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator animating={true} size="small" />
-            <Text style={{color: '#666666', paddingLeft: 10}}>努力加载中</Text>
-          </View>
-      )
-    } else {
-      return (
-          <ScrollView
-              removeClippedSubviews={true}
-          >
-            <AttentionMovieCell attentionMovie={attentionArray} />
-            <FlatList
-                data={comingArray}
-                extraData={this.state}
-                renderItem={this.renderItem}
-                keyExtractor={this.keyExtractor}
-            />
-          </ScrollView>
-      );
-    }
+    return (
+        <ScrollView
+            removeClippedSubviews={true}
+        >
+          <AttentionMovieCell attentionMovie={this.props.attentionList} />
+          <FlatList
+              data={this.state.data}
+              extraData={this.state}
+              renderItem={this.renderItem}
+              keyExtractor={this.keyExtractor}
+              onEndReachedThreshold={0.2}
+              onEndReached={() => this.footerRefreshing()}
+          />
+        </ScrollView>
+    );
   }
 
   renderItem= (item)=> {
@@ -76,6 +47,23 @@ export default class ComingMovieList extends Component {
 
   keyExtractor = (item, index) => {
     index.toString();
+  };
+
+  footerRefreshing() {
+    // 如果正在刷新或者没有更多数据，就不再拉取数据
+    if (this.state.count > this.props.comingMovieList.length) {
+      return (
+          <View style={{height:50, justifyContent: 'center', alignItem: 'center'}}>
+            <Text>已经到达最底部</Text>
+          </View>
+      )
+    } else {
+      let count = this.state.count;
+      this.setState({
+        count: this.state.count + 10,
+        data: this.props.comingMovieList.slice(0, count),
+      });
+    }
   }
 }
 

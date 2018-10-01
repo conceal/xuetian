@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
   FlatList,
-  StatusBar
+  StatusBar, Alert
 } from 'react-native';
 import * as ScreenUtils from "../../Common/ScreenUtils";
 
@@ -56,6 +56,17 @@ export default class MyEarn extends Component {
         .then(result => {
           console.log(result);
           let data = result.data.bounties;
+          if (data.length ===0){
+            Alert.alert(
+                '提示', //提示标题
+                '暂无奖励，请再接再厉', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
           let datas = [];
           let i = 0;
           data.map(function (item) {

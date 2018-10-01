@@ -22,9 +22,10 @@ export default class Change_TelProve extends Component{
     super(props);
     this.netUtils=new NetUtils;
     this.state={
-      time:30,
+      time:60,
       inputTexts: new Array(6),
       text:'',
+      editable:true
     }
   }
   static  defaultProps={
@@ -62,14 +63,12 @@ export default class Change_TelProve extends Component{
     let inputs = [];
     const {inputTexts} = this.state;
     for (let i = 0; i < 6; i++) {
-      let input = <TextInput
-          key={i}
-          underlineColorAndroid="gray"
-          editable={false}
-          maxLength={1}
-          style={styles.textInput}>
+      let input = <view>
+          <Text
+          key={i}>
         {inputTexts[i]}
-      </TextInput>;
+      </Text>
+    </view>;
       inputs.push(input);
     }
     return inputs;
@@ -112,33 +111,41 @@ export default class Change_TelProve extends Component{
         });
   }
   render(){
+    const { editable } = this.state;
     const { params } = this.props.navigation.state;
     return(
         <View style={styles.container}>
           <Text style={{paddingTop:15,marginLeft:20,color:'black'}}>验证码已发送至{params.text}</Text>
-          <View style={styles.partOne}>
-            <TextInput
-                ref={(ref) => this._input = ref}
-                autoFocus={true}
-                visible={false}
-                style={{height: 1, width: 1}}
-                maxLength={6}
-                keyboardType={'numeric'}
-                onChangeText={(text) => {
-                  this.setState({
-                    inputTexts: Array.from(text),
-                    text:text
-                  });
-                  text.length === 6 && this._input.blur();
-                }}
-                onBlur={()=>{
-                  this.textLogin()
-                }}
-            />
-            {this._renderInputs()}
-
-          </View>
+          <TouchableOpacity
+              style={styles.partOne}
+              onPress={()=>{this.setState({editable:!this.state.editable})}}
+          >
+            <View style={styles.partOne}>
+              {editable?<TextInput
+                      ref={(ref) => this._input = ref}
+                      autoFocus={true}
+                      visible={false}
+                      style={{height: 1, width: 1}}
+                      maxLength={6}
+                      keyboardType={'numeric'}
+                      onChangeText={(text) => {
+                        this.setState({
+                          inputTexts: Array.from(text),
+                          text:text
+                        });
+                        text.length === 6 && this._input.blur();
+                      }}
+                      onBlur={()=>{
+                        this.textLogin()
+                      }}
+                  />:
+                  <View/>
+              }
+              {this._renderInputs()}
+            </View>
+          </TouchableOpacity>
           {this.TextAdd()}
+
         </View>
     );
   }

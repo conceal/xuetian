@@ -23,26 +23,11 @@ export default class Movie extends Component {
     super(props);
     this.state = {
       refreshing: false,
-      showingMovieList:[],
+      showingMovieList:this.props.showingMovieList,
+      attentionList:[],
+      comingMovieList: [],
       selectedTab:'正在热映',
-      isLoading: true,
-    }
-  }
-
-  componentDidMount() {
-    setTimeout(()=> {
-      this.setState({
-        isLoading: false,
-      });
-    },1000);
-  }
-
-
-
-  componentDidUpdate() {
-    if(!this.state.isLoading) {
-      //Hide splash screen
-      SplashScreen.hide();
+      isLoading: false,
     }
   }
 
@@ -53,32 +38,28 @@ export default class Movie extends Component {
   };
 
   render() {
-    if (this.state.isLoading) {
-      return null;
-    } else {
-      return (
-          <View style={styles.container}>
-            <StatusBar
-                backgroundColor='#151C28'
-            />
-            <View style={styles.navBarStyle}>
-              <View style={styles.segmentedControlStyle}>
-                <SegmentedControl
-                    style={styles.tabStyle}
-                    selectedIndex={0}
-                    values={['正在热映', '即将上映']}
-                    onValueChange={(value) => this.onValueChange(value)}
-                />
-              </View>
+    return (
+        <View style={styles.container}>
+          <StatusBar
+              backgroundColor='#151C28'
+          />
+          <View style={styles.navBarStyle}>
+            <View style={styles.segmentedControlStyle}>
+              <SegmentedControl
+                  style={styles.tabStyle}
+                  selectedIndex={0}
+                  values={['正在热映', '即将上映']}
+                  onValueChange={(value) => this.onValueChange(value)}
+              />
             </View>
-            {
-              this.state.selectedTab === '正在热映' ?
-                  <ShowingMovieList dataArray={this.state.showingMovieList} /> :
-                  <ComingMovieList/>
-            }
           </View>
-      );
-    }
+          {
+            this.state.selectedTab === '正在热映' ?
+                <ShowingMovieList showingMovieList={this.props.showingMovieList} /> :
+                <ComingMovieList comingMovieList={this.props.comingMovieList} attentionList={this.props.attentionList}/>
+          }
+        </View>
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,35 +14,37 @@ import * as ScreenUtils from "../../Common/ScreenUtils";
 import NetUtils from "../../Common/NetUtils";
 
 let url = 'http://47.98.148.58/app/user/leaveWords.do';
-let width =Dimensions.get('window').width;
-let height =Dimensions.get('window').height;
-export default class Message extends Component{
-  constructor(props){
+let width = Dimensions.get('window').width;
+let height = Dimensions.get('window').height;
+export default class LeaveMessage extends Component {
+  constructor(props) {
     super(props);
     this.utils = new NetUtils;
-    this.state={
-      content:"",
-      mail:""
+    this.state = {
+      content: "",
+      mail: ""
     }
   }
-  static navigationOptions={
+
+  static navigationOptions = {
     headerTitle: '意见反馈',
-    headerTitleStyle:{
-      flex:1,
+    headerTitleStyle: {
+      flex: 1,
       textAlign: 'center'
     },
-    headerRight:(
+    headerRight: (
         <View/>
     ),
-    headerStyle:{
-      marginTop:StatusBar.currentHeight
+    headerStyle: {
+      marginTop: StatusBar.currentHeight
     }
   };
+
   onLoad() {
-    console.log("mail:"+this.state.mail);
-    console.log("content:"+this.state.content);
+    console.log("mail:" + this.state.mail);
+    console.log("content:" + this.state.content);
     this.utils.fetchNetRepository(url,
-        {"queOrSug":this.state.content,"qqMail":this.state.mail},
+        {"queOrSug": this.state.content, "qqMail": this.state.mail},
     )
         .catch(error => {
           this.setState({
@@ -50,36 +52,70 @@ export default class Message extends Component{
           })
         })
   }
-  revise(){
-    if(this.state.content === ""){
-      alert('请输入反馈信息')
-    }else {
-      if (this.state.mail === ""){
-        Alert.alert(
-            '提示', //提示标题
-            '请输入您的邮箱', //提示内容
-            [
-              {
-                text: '确定'
-              }
-            ] //按钮集合
-        );
-      } else {
-        this.onLoad();
-        Alert.alert(
-            '提示', //提示标题
-            `确定删除该${'您已反馈成功，感谢您的反馈'}？`, //提示内容
-            [
-              {
-                text: '确定'
-              }
-            ] //按钮集合
-        );
+
+  revise() {
+    if (this.state.content === null || this.state.content === "") {
+      Alert.alert(
+          '提示', //提示标题
+          '请输入反馈信息', //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }
+
+    if (this.state.mail === null || this.state.mail === "") {
+      Alert.alert(
+          '提示', //提示标题
+          '请输入您的邮箱', //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }
+    if ((this.state.mail !== null && this.state.mail !== "")&&(this.state.content !== null && this.state.content !== "")) {
+      {
+        this._CheckNum(this.state.mail);
+        console.log("dd");
+
       }
     }
+
   }
-  render(){
-    return(
+  _CheckNum(mail) {
+    const correctMail =/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+    let regPass = new RegExp(correctMail);
+    if (!regPass.test(mail)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入有效的邮箱", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      Alert.alert(
+          '提示', //提示标题
+          `您已反馈成功，感谢您的反馈`, //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+      this.props.navigation.goBack();
+      this.onLoad();
+    }
+  }
+
+  render() {
+    return (
         <View style={styles.container}>
           <StatusBar
               backgroundColor='white'
@@ -90,17 +126,21 @@ export default class Message extends Component{
               clearButtonMode='always'
               underlineColorAndroid='transparent'
               multiline={true}
-              onChangeText={(content) => {this.setState({content})}}
+              onChangeText={(content) => {
+                this.setState({content})
+              }}
           />
           <View style={styles.wrap}>
             <Text style={styles.text}>QQ邮箱:</Text>
             <TextInput
                 style={styles.textInputStyle2}
-                placeholder='选填，便于我们联系你'
+                placeholder='请填写您的邮箱便于我们联系你'
                 clearButtonMode='always'
                 underlineColorAndroid='transparent'
-                maxLength={11}
-                onChangeText={(mail) => {this.setState({mail})}}
+                maxLength={22}
+                onChangeText={(mail) => {
+                  this.setState({mail})
+                }}
             />
           </View>
 
@@ -116,38 +156,37 @@ export default class Message extends Component{
   }
 }
 
-const styles=StyleSheet.create({
-  textInputStyle:{
-    backgroundColor:'white',
-    width:width,
-    height:height/4,
-    paddingTop:ScreenUtils.scaleSize(10)
+const styles = StyleSheet.create({
+  textInputStyle: {
+    backgroundColor: 'white',
+    width: width,
+    height: height / 4,
+    paddingTop: ScreenUtils.scaleSize(10)
   },
-  textInputStyle2:{
-    width:width*0.6,
+  textInputStyle2: {
+    width: width * 0.6,
     height: ScreenUtils.scaleSize(88),
-    paddingTop:ScreenUtils.scaleSize(18),
   },
-  wrap:{
-    flexDirection:'row',
-    backgroundColor:'white',
-    width:width,
+  wrap: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    width: width,
     height: ScreenUtils.scaleSize(88),
-    marginTop:ScreenUtils.scaleSize(20)
+    marginTop: ScreenUtils.scaleSize(20)
   },
-  text:{
-    width:width*0.25,
+  text: {
+    width: width * 0.25,
     height: ScreenUtils.scaleSize(88),
-    fontSize:ScreenUtils.setSpText(17),
-    paddingLeft:ScreenUtils.scaleSize(15),
-    paddingTop:ScreenUtils.scaleSize(18),
+    fontSize: ScreenUtils.setSpText(17),
+    paddingLeft: ScreenUtils.scaleSize(15),
+    paddingTop: ScreenUtils.scaleSize(18),
   },
   button2Style: {
     width: ScreenUtils.scaleSize(690),
     height: ScreenUtils.scaleSize(88),
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:6,
+    borderRadius: 6,
     backgroundColor: '#FFE059',
     marginTop: ScreenUtils.scaleSize(27),
     marginBottom: ScreenUtils.scaleSize(27),

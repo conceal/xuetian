@@ -1,5 +1,5 @@
 import {
-    NativeModules
+  NativeModules
 } from 'react-native';
 
 export default NativeModules.sharemodule;

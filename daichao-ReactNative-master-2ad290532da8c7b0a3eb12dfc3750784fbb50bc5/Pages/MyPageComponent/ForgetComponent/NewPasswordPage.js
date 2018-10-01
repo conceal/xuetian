@@ -31,7 +31,25 @@ export default class Change_Password extends Component{
     this.utils=new NetUtils;
     this.state=({
       newPwd:"",
+      oldPwd:""
     })
+  }
+  _CheckNum(Password) {
+    const correctPass =/^[a-zA-Z0-9]{6,21}$/;
+    let regPass = new RegExp(correctPass);
+    if (!regPass.test(Password)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的密码", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.onLoad()
+    }
   }
   onLoad() {
     this.utils.fetchNetRepository(url,
@@ -70,7 +88,7 @@ export default class Change_Password extends Component{
             <TextInput
                 placeholder={'输入原密码'}
                 maxLength={11}
-                style={{width:width-70,backgroundColor:'white'}}
+                style={{width:width-70, height:50, backgroundColor:'white'}}
                 underlineColorAndroid={'transparent'}
                 keyboardType={'default'}
                 onChangeText={(text)=>this.setState({oldPwd:text})}
@@ -85,7 +103,7 @@ export default class Change_Password extends Component{
             <TextInput
                 placeholder={'输入新密码'}
                 maxLength={11}
-                style={{width:width-70,backgroundColor:'white'}}
+                style={{width:width-70, height:50, backgroundColor:'white'}}
                 underlineColorAndroid={'transparent'}
                 keyboardType={'default'}
                 onChangeText={(text)=>this.setState({newPwd:text})}
@@ -95,7 +113,21 @@ export default class Change_Password extends Component{
           <TouchableOpacity
 
               onPress={()=>{
-                this.onLoad()
+                if (this.state.newPwd !== this.state.oldPwd) {
+                  Alert.alert(
+                      '提示', //提示标题
+                      '请确认前后密码输入一致', //提示内容
+                      [
+                        {
+                          text: '确定'
+                        }
+                      ] //按钮集合
+                  );
+                }else {
+                  let str = this.state.newPwd;
+                  let Str = str.replace(/\"/g,"");
+                  this._CheckNum(Str)
+                }
               }}
               style={styles.touch}
           >
@@ -114,12 +146,12 @@ const styles=StyleSheet.create({
   },
   container2:{
     flexDirection:'row',
-    paddingTop:2,
-    paddingBottom:40,
+    marginTop:2,
+    marginBottom:40,
   },
   container1:{
     flexDirection:'row',
-    paddingTop:20,
+    marginTop:10,
   },
   picker:{
     width:80,

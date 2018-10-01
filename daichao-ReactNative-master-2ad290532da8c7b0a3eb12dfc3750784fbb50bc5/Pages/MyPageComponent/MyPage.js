@@ -7,18 +7,22 @@ import {
   TouchableOpacity,
   FlatList,
   DeviceEventEmitter,
-  AsyncStorage, Platform
+  AsyncStorage,
+  Alert,
+  Linking,
+  Dimensions,
+  Platform,
 } from 'react-native';
 import * as ScreenUtils from "../Common/ScreenUtils";
 import NetUtils from "../Common/NetUtils";
 import CookieManager from 'react-native-cookies';
 
-let Dimensions = require('Dimensions');
+let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
 let {width} = Dimensions.get('window');
 let url = 'http://47.98.148.58/app/user/showUserInfo.do';
 let URL = 'http://47.98.148.58/app/user/logoff.do';
-let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
-
+let Url = "http://47.98.148.58/app/user/versionCheckAndUpd.do";
+let URl = "http://47.98.148.58/dc/dcweb/apkDownLoad.html";
 export default class MyPage extends Component {
 
   constructor(props) {
@@ -30,9 +34,9 @@ export default class MyPage extends Component {
       inviteNum: '',
       myAward: '',
       picUrl: 'icon',
-      tel: 63244396,
+      tel: 6324,
       userName: '',
-      callback:0
+      callback: 0,
     }
   }
 
@@ -48,6 +52,7 @@ export default class MyPage extends Component {
             picUrl: result.data.picUrl,
             tel: result.data.tel,
             userName: result.data.userName,
+            intro:result.data.intro
           });
         })
         .catch(error => {
@@ -56,18 +61,37 @@ export default class MyPage extends Component {
           })
         })
   }
+
   componentDidMount() {
-    DeviceEventEmitter.addListener('NoticeName', (value)=>{
+    this.changePic = DeviceEventEmitter.addListener('ChangePic', (value) => {
       //这里面是要调用的方法，比如：刷新
       //value:是下面页面在 通知 时 ，所传递过来的参数
-      this.onLoad()
+      this.onLoad();
+      console.log("执行了ChangePic")
+    });
+    this.loginSuccess = DeviceEventEmitter.addListener('LoginSuccess', (value) => {
+      //这里面是要调用的方法，比如：刷新
+      //value:是下面页面在 通知 时 ，所传递过来的参数
+      this.onLoad();
+    });
+    this.notice = DeviceEventEmitter.addListener('NoticeName', (value) => {
+      //这里面是要调用的方法，比如：刷新
+      //value:是下面页面在 通知 时 ，所传递过来的参数
+      this.onLoad();
+      console.log("执行了NoticeName")
     });
     this.onLoad()
   }
+  componentWillUnmount(){
+    this.changePic.remove();
+    this.loginSuccess.remove();
+    this.notice.remove();
+  }
+
 
   titleCheck() {
     if (this.state.login) {
-      return(
+      return (
           <View style={styles.row1Style}>
             <Text style={styles.MeStyle}>我的</Text>
             <TouchableOpacity
@@ -87,7 +111,7 @@ export default class MyPage extends Component {
     }
   }
 
-  logOut(){
+  logOut() {
     this.netUtils.fetchNetRepository(URL)
         .then(result => {
           console.log(result);
@@ -95,7 +119,7 @@ export default class MyPage extends Component {
           this.setState({
             login: result.data.status,
           });
-          if (isTrue === 0){
+          if (isTrue === 0) {
             this.delData();
             this.clearCookie()
           }
@@ -114,8 +138,8 @@ export default class MyPage extends Component {
         });
   }
 
-  Checkin() {
-    console.log("登录状态"+this.state.login);
+  CheckIn() {
+    console.log("登录状态" + this.state.login);
     if (this.state.login) {
       return (
           <View style={{justifyContent: 'center'}}>
@@ -124,7 +148,11 @@ export default class MyPage extends Component {
               marginBottom: ScreenUtils.scaleSize(20),
               alignItems: "flex-end"
             }}>
-              <Text style={styles.nameStyle}>{this.state.userName}</Text>
+              <Text
+                  numberOfLines={1}
+                  ellipsizeMode='tail'
+                  style={styles.nameStyle}
+              >{this.state.userName}</Text>
               <Text style={{
                 fontSize: ScreenUtils.setSpText(18),
                 color: '#333333',
@@ -154,7 +182,7 @@ export default class MyPage extends Component {
     }
   }
 
-  delData(){
+  delData() {
     AsyncStorage.removeItem('login');
   }
 
@@ -202,7 +230,7 @@ export default class MyPage extends Component {
           </TouchableOpacity>
       )
     } else {
-      return(
+      return (
           <TouchableOpacity style={styles.rowStyle}>
             <View style={styles.leftStyle}>
               <Image source={require('../../res/Images/yaoqingma.png')} style={styles.icon05}/>
@@ -227,7 +255,8 @@ export default class MyPage extends Component {
 
   CheckInvite() {
     if (this.state.login) {
-      return( <TouchableOpacity
+      return (
+          <TouchableOpacity
               style={styles.rowStyle}
               onPress={() => this.props.navigation.navigate('MyInvite')}
           >
@@ -241,7 +270,7 @@ export default class MyPage extends Component {
           </TouchableOpacity>
       );
     } else {
-      return(
+      return (
           <TouchableOpacity
               style={styles.rowStyle}
               onPress={() => this.props.navigation.navigate('Second')}
@@ -286,7 +315,7 @@ export default class MyPage extends Component {
           </TouchableOpacity>
       )
     } else {
-      return(
+      return (
           <TouchableOpacity
               style={styles.rowStyle}
               onPress={() => this.props.navigation.navigate('Second')}
@@ -305,10 +334,10 @@ export default class MyPage extends Component {
 
   CheckLeave() {
     if (this.state.login) {
-      return(
+      return (
           <TouchableOpacity
               style={styles.rowStyle}
-              onPress={() => this.props.navigation.navigate('Leave')}
+              onPress={() => this.props.navigation.navigate('Leave',)}
           >
             <View style={styles.leftStyle}>
               <Image source={require('../../res/Images/liuyan.png')} style={styles.icon01}/>
@@ -320,7 +349,8 @@ export default class MyPage extends Component {
           </TouchableOpacity>
       )
     } else {
-      return (<TouchableOpacity
+      return (
+          <TouchableOpacity
               style={styles.rowStyle}
               onPress={() => this.props.navigation.navigate('Second')}
           >
@@ -335,16 +365,57 @@ export default class MyPage extends Component {
       )
     }
   }
-  CheckPic(){
-    if (this.state.login){
-      return<View style={{justifyContent: 'center', paddingLeft: ScreenUtils.scaleSize(30)}}>
-        <Image source={{uri:this.state.picUrl}} style={styles.imageStyle}/>
+
+  CheckPic() {
+    if (this.state.login) {
+      return <View style={{justifyContent: 'center', paddingLeft: ScreenUtils.scaleSize(30)}}>
+        <Image source={{uri: this.state.picUrl}} style={styles.imageStyle}/>
       </View>
-    }else {
-      return<View style={{justifyContent: 'center', paddingLeft: ScreenUtils.scaleSize(30)}}>
+    } else {
+      return <View style={{justifyContent: 'center', paddingLeft: ScreenUtils.scaleSize(30)}}>
         <Image source={require('../../res/Images/icon.png')} style={styles.imageStyle}/>
       </View>
     }
+  }
+
+  Refresh() {
+    this.netUtils.fetchNetRepository(Url,
+        {"version": "1.0.0"},
+    )
+        .then(result => {
+          console.log(result);
+          if (result.code === 1) {
+            Alert.alert(
+                '提示', //提示标题
+                '已经是最新版本', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
+          if (result.code === 0) {
+            Linking.canOpenURL(URl)
+                .then(supported => {
+                  if (supported) {
+                    Linking.openURL(URl);
+                  } else {
+                    console.log('无法打开该链接:' + URl);
+                  }
+                });
+
+            Alert.alert(
+                '提示', //提示标题
+                '存在新版本，请更新', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
+        })
   }
 
   _header = () => {
@@ -357,7 +428,7 @@ export default class MyPage extends Component {
         </View>
         <View style={styles.centerStyle}>
           {this.CheckPic()}
-          {this.Checkin()}
+          {this.CheckIn()}
         </View>
         <View>
           <View style={styles.TopStyle}></View>
@@ -405,13 +476,16 @@ export default class MyPage extends Component {
             </View>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.rowStyle}>
+        <TouchableOpacity
+            style={styles.rowStyle}
+            onPress={() => this.Refresh()}
+        >
           <View style={styles.leftStyle}>
             <Image source={require('../../res/Images/shengji.png')} style={styles.icon01}/>
           </View>
           <View style={styles.rightStyle}>
-            <Text style={styles.listFont}>版本更新</Text>
-            <Text style={styles.icon02t}>已是最新版本</Text>
+            <Text style={styles.listFont}>版本升级</Text>
+            <Image source={require('../../res/Images/ahead.png')} style={styles.icon02}/>
           </View>
         </TouchableOpacity>
         {this.CheckLeave()}
@@ -431,6 +505,7 @@ export default class MyPage extends Component {
       </View>
     </View>
   };
+
   render() {
     return (
         <View style={styles.container}>
@@ -560,6 +635,12 @@ const styles = StyleSheet.create({
         height: ScreenUtils.scaleSize(75),
         marginBottom: ScreenUtils.scaleSize(20),
       },
+      row51Style: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        height: ScreenUtils.scaleSize(75),
+      },
 
       leftStyle: {
         width: ScreenUtils.scaleSize(72),
@@ -579,9 +660,9 @@ const styles = StyleSheet.create({
         width: ScreenUtils.scaleSize(60),
       },
       icon002: {
-        position:'absolute',
-        top:ScreenUtils.scaleSize(16),
-        right:ScreenUtils.scaleSize(2),
+        position: 'absolute',
+        top: ScreenUtils.scaleSize(16),
+        right: ScreenUtils.scaleSize(2),
         height: ScreenUtils.scaleSize(60),
         width: ScreenUtils.scaleSize(60),
       },

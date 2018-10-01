@@ -5,7 +5,7 @@ import {
   View,
   Dimensions,
   StatusBar,
-  Text
+  Text, DeviceEventEmitter
 } from 'react-native';
 import TabNavigator from "react-native-tab-navigator";
 import Newc from "./Tab/Newc";
@@ -127,6 +127,7 @@ export default class RowList extends Component {
                                                  source={{uri:this.state.img12}}/>}
                 onPress={() => {
                   this.setState({selectedTab: 'tb_new'});
+                  DeviceEventEmitter.emit('ChangeTab1',1);
                   this.props.navigation.setParams({tab1Id:this.state.tab1Id,title:this.state.name1})
                 }}
             >
@@ -142,6 +143,7 @@ export default class RowList extends Component {
                                                  source={{uri:this.state.img22}}/>}
                 onPress={() => {
                   this.setState({selectedTab: 'tb_black'});
+                  DeviceEventEmitter.emit('ChangeTab2',1);
                   this.props.navigation.setParams({tab2Id:this.state.tab2Id,title: this.state.name2})
                 }}
             >
@@ -157,6 +159,7 @@ export default class RowList extends Component {
                                                  source={{uri:this.state.img32}}/>}
                 onPress={() => {
                   this.setState({selectedTab: 'tb_long'});
+                  DeviceEventEmitter.emit('ChangeTab3',1);
                   this.props.navigation.setParams({tab3Id:this.state.tab3Id,title: this.state.name3})
                 }}
             >
@@ -172,6 +175,7 @@ export default class RowList extends Component {
                                                  source={{uri:this.state.img42}}/>}
                 onPress={() => {
                   this.setState({selectedTab: 'tb_high'});
+                  DeviceEventEmitter.emit('ChangeTab4',1);
                   this.props.navigation.setParams({tab4Id:this.state.tab4Id,title: this.state.name4})
                 }}
             >
@@ -187,6 +191,7 @@ export default class RowList extends Component {
                                                  source={{uri:this.state.img52}}/>}
                 onPress={() => {
                   this.setState({selectedTab: 'tb_low'});
+                  DeviceEventEmitter.emit('ChangeTab5',1);
                   this.props.navigation.setParams({tab5Id:this.state.tab5Id,title:this.state.name5})
                 }}
             >

@@ -19,14 +19,18 @@ import PlayMovie from '../screens/movie/playMovie/PlayMovie';
 import ReadDetail from '../screens/read/ReadDetail';
 import NewDetails from '../screens/newRead/NewDetails';
 import AuthorScreen from '../screens/newRead/AuthorScreen';
-
+import Redact from '../screens/mine/Redact';
+import guideScreen from '../screens/guideScreen';
+import Movie from '../screens/movie/Movie';
 
 export default class Routers extends Component {
   render() {
     return (
         <Router>
           <Scene key='root'>
-            <Scene key='Home' component={Home} initial={true} hideNavBar/>
+            <Scene key='guideScreen' component={guideScreen} initial={true} hideNavBar/>
+            <Scene key='Home' component={Home}  hideNavBar/>
+            <Scene key='Movie' component={Movie}   hideNavBar/>
             <Scene key='MovieDetails' component={MovieDetails} hideNavBar/>
             <Scene key='PlayMovieList' component={PlayMovieList} hideNavBar/>
             <Scene key='ActorList' component={ActorList} hideNavBar/>
@@ -37,6 +41,7 @@ export default class Routers extends Component {
             <Scene key='ReadDetail' component={ReadDetail} hideNavBar/>
             <Scene key='NewDetails' component={NewDetails} hideNavBar/>
             <Scene key='AuthorScreen' component={AuthorScreen} hideNavBar/>
+            <Scene key='Redact' component={Redact} hideNavBar/>
           </Scene>
         </Router>
     );

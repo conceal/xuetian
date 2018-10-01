@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {StyleSheet, View, Text, FlatList, ActivityIndicator, TouchableOpacity, TextInput, Modal} from 'react-native';
 import ShowingMovieCell from './ShowingMovieCell';
 import HttpUtils from "../../../config/HttpUtils";
 import {showingMovies} from "../../../config/utils/Services";
@@ -16,48 +16,28 @@ export default class ShowingMovieList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showingMovieList:[],
-      isLoading: true,
+      modalVisible: false,
+      refreshing:false,
+      data: this.props.showingMovieList.slice(0,9),
+      count:19,
     }
-  }
-
-  componentDidMount() {
-    this.loadMovies();
-  }
-
-  loadMovies() {
-    HttpUtils.get(showingMovies())
-        .then((response)=> {
-          this.setState({
-            showingMovieList: response.ms,
-            isLoading:false,
-          });
-        }).catch((error)=> {
-            console(error);
-        });
   }
 
   render() {
-    let dataSource = this.state.showingMovieList;
-    if (this.state.isLoading) {
-      return (
-          <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
-            <ActivityIndicator animating={true} size="small" />
-            <Text style={{color: '#666666', paddingLeft: 10}}>努力加载中</Text>
-          </View>
-      )
-    } else {
       return (
           <View style={styles.container}>
             <FlatList
-                data={dataSource}
+                data={this.state.data}
                 extraData={this.state}
                 renderItem={this.renderItem}
-                keyExtractor={this._keyExtractor}
+                keyExtractor={(item, index) => item.id}
+                refreshing={this.state.refreshing}
+                onRefresh={() => this.headerRefreshing()}
+                onEndReachedThreshold={0.2}
+                onEndReached={() => this.footerRefreshing()}
             />
           </View>
       );
-    }
   }
 
   renderItem = (item)=> {
@@ -66,8 +46,28 @@ export default class ShowingMovieList extends Component {
     )
   };
 
-  _keyExtractor = (item, index) => index;
+  headerRefreshing() {
+    this.setState({
+      data:this.props.showingMovieList.slice(0,9)
+      })
+  }
 
+  footerRefreshing() {
+    // 如果正在刷新或者没有更多数据，就不再拉取数据
+    if (this.state.count > this.props.showingMovieList.length) {
+      return (
+          <View style={{height:50, justifyContent: 'center', alignItem: 'center'}}>
+            <Text>已经到达最底部</Text>
+          </View>
+      )
+    } else {
+      let count = this.state.count;
+      this.setState({
+        count: this.state.count + 10,
+        data: this.props.showingMovieList.slice(0, count),
+      });
+    }
+  }
 }
 
 const styles = StyleSheet.create({

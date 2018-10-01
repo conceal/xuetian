@@ -6,7 +6,9 @@ import {
   View,
   TextInput,
   Picker,
-  Dimensions, StatusBar
+  Dimensions,
+  StatusBar,
+  Alert,
 } from 'react-native';
 import NetUtils from "../../Common/NetUtils";
 const {width} = Dimensions.get('window');
@@ -16,7 +18,7 @@ export default class Register extends Component{
     super(props);
     this.netUtils=new NetUtils();
     this.state={
-      text:''
+      text:""
     }
   }
   static navigationOptions={
@@ -36,6 +38,41 @@ export default class Register extends Component{
     this.netUtils.fetchNetRepository(url,
         {"telNumber":this.state.text},
     )
+        .then(result => {
+          console.log(result);
+
+          if(result.code===0){
+            this.Send()
+          }else {
+            Alert.alert(
+                '提示', //提示标题
+                "手机号已存在", //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+          }
+        })
+  }
+  _CheckProve(Num) {
+    var correctnum = /^1(3|4|5|7|8)\d{9}$/;
+    var regNum = new RegExp(correctnum);
+    if (!regNum.test(Num)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的手机号", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+      return;
+    }else {
+      this.textLogin();
+    }
   }
   render(){
     return(
@@ -46,7 +83,7 @@ export default class Register extends Component{
                 onValueChange={(num)=>this.setState({num:num})}
                 style={styles.picker}
                 mode='dropdown'
-                itemStyle={{height:50,}}
+                itemStyle={{height:50}}
             >
               <Picker.Item label='+86' value={'移动'} style={{fontSize:5}}/>
               <Picker.Item label='+10' value={'联通'} style={{fontSize:5}}/>
@@ -55,7 +92,7 @@ export default class Register extends Component{
             <TextInput
                 placeholder={'手机号'}
                 maxLength={11}
-                style={{width:width-50, height: 50, backgroundColor:'white'}}
+                style={{width:width-50, height:50, backgroundColor:'white'}}
                 underlineColorAndroid={'transparent'}
                 keyboardType={'numeric'}
                 onChangeText={(text)=>this.setState({text:text,click:true})}
@@ -63,8 +100,20 @@ export default class Register extends Component{
           </View>
           <TouchableOpacity
               onPress={()=>{
-                this.Send();
-                this.textLogin()
+                if (this.state.text !== null&&this.state.text !== ""){
+                  this._CheckProve(parseInt(this.state.text))
+                } else {
+                  Alert.alert(
+                      '提示', //提示标题
+                      "请输入手机号", //提示内容
+                      [
+                        {
+                          text: '确定'
+                        }
+                      ] //按钮集合
+                  );
+                }
+
               }}
               style={styles.touch}
           >
@@ -81,10 +130,10 @@ const styles=StyleSheet.create({
     backgroundColor:'#F3F4F6'
   },
   container:{
+    height:50,
     flexDirection:'row',
-    height: 50,
-    marginTop:20,
-    marginBottom:40,
+    paddingTop:20,
+    paddingBottom:40,
   },
   picker:{
     width:80,

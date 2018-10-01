@@ -30,6 +30,7 @@ import FindBackPage from "./MyPageComponent/ForgetComponent/FindBackPage";
 import MyWeChat from "./MyPageComponent/SectionComponent/MyWeChat";
 import LoginProve from "./MyPageComponent/LoginProve";
 import MyEarn from "./MyPageComponent/SectionComponent/MyEarn";
+import RewardRules from "./EarnPageComponent/RewardRules";
 
 const Root = StackNavigator({
       Home: {
@@ -48,7 +49,7 @@ const Root = StackNavigator({
       Second: {
         screen: Login,
       },
-      Message: {
+      Fourth: {
         screen: Message,
       },
       MyInvite: {
@@ -56,6 +57,9 @@ const Root = StackNavigator({
       },
       MyHelp: {
         screen: MyHelp,
+      },
+      RewardRules: {
+        screen: RewardRules,
       },
       DetailHelp: {
         screen: DetailHelp,

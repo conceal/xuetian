@@ -114,7 +114,7 @@ const styles=StyleSheet.create({
 
   },
   header:{
-    fontSize:ScreenUtils.setSpText(15),
+    fontSize:ScreenUtils.setSpText(16),
     color:'black'
   },
   content:{

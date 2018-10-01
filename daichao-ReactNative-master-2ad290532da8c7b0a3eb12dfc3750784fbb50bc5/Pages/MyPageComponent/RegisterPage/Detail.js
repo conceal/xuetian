@@ -7,7 +7,9 @@ import {
   Image,
   TextInput,
   Picker,
-  Dimensions, StatusBar
+  Dimensions,
+  StatusBar,
+  Alert
 } from 'react-native';
 import NetUtils from "../../Common/NetUtils";
 import JPushModule from "jpush-react-native/index";
@@ -20,7 +22,8 @@ export default class Detail extends Component{
     this.netUtils=new NetUtils();
     this.state={
       nickName:'',
-      password:0
+      password:0,
+      Fpassword:0
     }
   }
   static navigationOptions={
@@ -41,6 +44,50 @@ export default class Detail extends Component{
     this.netUtils.fetchNetRepository(url,
         {"userName":this.state.nickName,"password":this.state.password},
     )
+        .then(result => {
+          console.log(result);
+          if(result.code === 0){
+            Alert.alert(
+                '提示', //提示标题
+                '注册成功', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+            this.props.navigation.navigate('Second');
+          }
+          if (result.code === 1){
+            Alert.alert(
+                '提示', //提示标题
+                '用户已存在，请勿重复注册', //提示内容
+                [
+                  {
+                    text: '确定'
+                  }
+                ] //按钮集合
+            );
+            this.props.navigation.navigate('Second');
+          }
+        })
+  }
+  _CheckNum(Password) {
+    const correctPass =/^[a-zA-Z0-9]{6,21}$/;
+    let regPass = new RegExp(correctPass);
+    if (!regPass.test(Password)){
+      Alert.alert(
+          '提示', //提示标题
+          "请输入正确的密码", //提示内容
+          [
+            {
+              text: '确定'
+            }
+          ] //按钮集合
+      );
+    }else {
+      this.textLogin()
+    }
   }
 
   render(){
@@ -57,6 +104,7 @@ export default class Detail extends Component{
                 style={{width:width,backgroundColor:'white',marginBottom:2,height:45}}
                 underlineColorAndroid={'transparent'}
                 keyboardType={'default'}
+                maxLength={10}
                 onChangeText={(nickName)=>{this.setState({nickName})}}
             />
             <TextInput
@@ -65,6 +113,7 @@ export default class Detail extends Component{
                 underlineColorAndroid={'transparent'}
                 keyboardType={'default'}
                 secureTextEntry={true}
+                onChangeText={(Fpassword)=>{this.setState({Fpassword})}}
             />
             <TextInput
                 placeholder={'确认密码'}
@@ -78,8 +127,32 @@ export default class Detail extends Component{
 
           <TouchableOpacity
               onPress={()=>{
-                this.props.navigation.navigate('Second');
-                this.textLogin()
+                if (this.state.password === 0){
+                  Alert.alert(
+                      '提示', //提示标题
+                      "请输入密码", //提示内容
+                      [
+                        {
+                          text: '确定'
+                        }
+                      ] //按钮集合
+                  );
+
+                }else if ((this.state.Fpassword === this.state.password)&&(this.state.Fpassword!==0&&this.state.password!==0)) {
+                  let str = this.state.password;
+                  let Str = str.replace(/\"/g,"");
+                  this._CheckNum(Str);
+                }else {
+                  Alert.alert(
+                      '提示', //提示标题
+                      "请确认两次密码输入一致", //提示内容
+                      [
+                        {
+                          text: '确定'
+                        }
+                      ] //按钮集合
+                  );
+                }
               }}
               style={styles.touch}
           >
@@ -91,7 +164,7 @@ export default class Detail extends Component{
             <TouchableOpacity
                 onPress={()=>{}}
             >
-              <Text style={{color:'blue'}}>《米米贷用户协议》</Text>
+              <Text style={{color:'blue'}}>《米米来用户协议》</Text>
             </TouchableOpacity>
           </View>
         </View>
