@@ -38,7 +38,6 @@ export default class AboutUs extends Component {
     onLoad() {
         this.netUtils.fetchNetRepository(url)
             .then(result => {
-                console.log(result);
                 this.setState({
                     description:result.data.my_we
                 })

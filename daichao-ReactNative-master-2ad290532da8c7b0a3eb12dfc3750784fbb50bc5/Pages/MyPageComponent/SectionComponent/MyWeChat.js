@@ -44,7 +44,6 @@ export default class MyWeChat extends Component{
     onLoad() {
         this.netUtils.fetchNetRepository(url)
             .then(result => {
-                console.log(result);
                 this.setState({
                     img:result.dev
                 })
@@ -59,8 +58,6 @@ export default class MyWeChat extends Component{
     onload() {
         this.netUtils.fetchNetRepository(URL)
             .then(result => {
-                console.log(11111111);
-                console.log(result);
                 this.setState({
                     description:result.data.my_wx2,
                     title:result.data.my_wx1

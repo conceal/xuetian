@@ -9,8 +9,7 @@ import {
     DeviceEventEmitter,
     AsyncStorage,
     Alert,
-    Linking,
-    Platform,
+    Linking, Platform
 } from 'react-native';
 import * as ScreenUtils from "../Common/ScreenUtils";
 import NetUtils from "../Common/NetUtils";
@@ -23,8 +22,8 @@ let URL = 'http://47.98.148.58/app/user/logoff.do';
 let Url = "http://47.98.148.58/app/user/versionCheckAndUpd.do";
 let URl = "http://47.98.148.58/dc/dcweb/apkDownLoad.html";
 let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
-
 export default class MyPage extends Component {
+
     constructor(props) {
         super(props);
         this.netUtils = new NetUtils;
@@ -45,7 +44,6 @@ export default class MyPage extends Component {
     onLoad() {
         this.netUtils.fetchNetRepository(url)
             .then(result => {
-                console.log(result);
                 this.setState({
                     inviteNum: result.data.invitationCode,
                     myAward: result.data.myAward,
@@ -68,7 +66,6 @@ export default class MyPage extends Component {
             //这里面是要调用的方法，比如：刷新
             //value:是下面页面在 通知 时 ，所传递过来的参数
             this.onLoad();
-            console.log("执行了ChangePic")
         });
         this.loginSuccess = DeviceEventEmitter.addListener('LoginSuccess', (value) => {
             //这里面是要调用的方法，比如：刷新
@@ -79,7 +76,6 @@ export default class MyPage extends Component {
             //这里面是要调用的方法，比如：刷新
             //value:是下面页面在 通知 时 ，所传递过来的参数
             this.onLoad();
-            console.log("执行了NoticeName")
         });
         this.onLoad()
     }
@@ -115,7 +111,6 @@ export default class MyPage extends Component {
     logOut() {
         this.netUtils.fetchNetRepository(URL)
             .then(result => {
-                console.log(result);
                 let isTrue = result.code;
                 this.setState({
                     login: result.data.status,
@@ -135,12 +130,10 @@ export default class MyPage extends Component {
     clearCookie() {
         CookieManager.clearAll()
             .then((res) => {
-                console.log('CookieManager.clearAll =>', res);
             });
     }
 
     CheckIn() {
-        console.log("登录状态" + this.state.login);
         if (this.state.login) {
             return (
                 <View style={{justifyContent: 'center'}}>
@@ -384,7 +377,6 @@ export default class MyPage extends Component {
             {"version": "1.0.0"},
         )
             .then(result => {
-                console.log(result);
                 if (result.code === 1) {
                     Alert.alert(
                         '提示', //提示标题
@@ -402,7 +394,6 @@ export default class MyPage extends Component {
                             if (supported) {
                                 Linking.openURL(URl);
                             } else {
-                                console.log('无法打开该链接:' + URl);
                             }
                         });
 
@@ -515,7 +506,7 @@ export default class MyPage extends Component {
                         <View style={{height: Platform.OS === 'ios' ? (isIphoneX ? 40 : 20) : 0, backgroundColor: '#FFE059'}}>
                         </View> : null
                 }
-              {this.titleCheck()}
+                {this.titleCheck()}
                 <FlatList
                     extraData={this.state}
                     ListHeaderComponent={this._header}
@@ -557,8 +548,8 @@ const styles = StyleSheet.create({
         },
         settingStyle: {
             width: ScreenUtils.scaleSize(120),
-            height: ScreenUtils.scaleSize(40),
-            fontSize: ScreenUtils.setSpText(18)
+            height: ScreenUtils.scaleSize(45),
+            fontSize: ScreenUtils.setSpText(17)
         },
         row2Style: {
             flexDirection: 'row',

@@ -51,12 +51,7 @@ export default class Login extends Component {
 
     componentDidMount(){
         JPushModule.initPush();
-        JPushModule.notifyJSDidLoad(resultCode => {
-            if (resultCode === 0) {
-            }
-        });
         JPushModule.getRegistrationID((registrationId) => {
-            console.log("registrationId:"+ registrationId);
             this.setState({
                 registrationId:registrationId
             })
@@ -67,8 +62,6 @@ export default class Login extends Component {
             {"userTel": this.state.textTel, "password": this.state.textPassword,"registrationId":this.state.registrationId},
         )
             .then(result => {
-                console.log(result);
-
 
                 if(result.code===0){
                     Alert.alert(
@@ -112,7 +105,6 @@ export default class Login extends Component {
             {"telNumber": this.state.textTel},
         )
             .then(result => {
-                console.log(result);
                 if(result.code === 0){
                     this.props.navigation.navigate('LoginProve',{text:this.state.textTel});
                 }else {
@@ -181,6 +173,7 @@ export default class Login extends Component {
                             onValueChange={(num) => this.setState({num: num})}
                             style={styles.picker}
                             mode='dropdown'
+                            itemStyle={{height: 50}}
                         >
                             <Picker.Item label='+86' value={'移动'} style={{fontSize: 5}}/>
                             <Picker.Item label='+10' value={'联通'} style={{fontSize: 5}}/>
@@ -190,7 +183,7 @@ export default class Login extends Component {
                             placeholder={'输入手机号'}
                             maxLength={11}
                             underline={true}
-                            style={{width: width - 150, backgroundColor: 'white'}}
+                            style={{width: width - 150, height: 50, backgroundColor: 'white'}}
                             underlineColorAndroid={'#F1F1F1'}
                             keyboardType={'numeric'}
                             onChangeText={(textTel) => {this.setState({textTel});}}
@@ -240,6 +233,7 @@ export default class Login extends Component {
                             onValueChange={(num) => this.setState({num: num})}
                             style={styles.picker}
                             mode='dropdown'
+                            itemStyle={{height: 50}}
                         >
                             <Picker.Item label='+86' value={'移动'} style={{fontSize: 5}}/>
                             <Picker.Item label='+10' value={'联通'} style={{fontSize: 5}}/>
@@ -392,6 +386,7 @@ const styles = StyleSheet.create({
     },
     Call: {
         flexDirection: 'row',
+        height:50,
         borderBottomColor: 'gray',
         marginBottom: ScreenUtils.scaleSize(10),
         backgroundColor: 'white'
@@ -407,6 +402,7 @@ const styles = StyleSheet.create({
     },
     picker: {
         marginRight: ScreenUtils.scaleSize(60),
+        height:50,
         width: ScreenUtils.scaleSize(160)
     },
     warnStyle:{

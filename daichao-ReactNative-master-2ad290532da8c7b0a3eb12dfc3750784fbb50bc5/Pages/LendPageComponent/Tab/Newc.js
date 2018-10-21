@@ -53,7 +53,6 @@ export default class Newc extends Component {
             {"tabId":params.tab1Id,"pageNo":page},
         )
             .then(result => {
-                console.log(result);
                 let data = result.data.commodityList;
                 if (this.state.First === true){
                     imageurl = result.data.headerImg.headerImg;
@@ -98,7 +97,6 @@ export default class Newc extends Component {
                 }
 
                 if(page%2 === 0){
-                    console.log("111111111111");
                     this.setModalVisible(true);
                     this.setState({
                         FdataUrl:result.data.fwlist.fw_url,
@@ -137,7 +135,6 @@ export default class Newc extends Component {
     }
 
     Load(){
-        console.log(this.state.isLoading);
         if (this.state.isLoading === true) {
             return<View style={styles.loading}>
                 <ActivityIndicator/>
@@ -204,7 +201,6 @@ export default class Newc extends Component {
             })
         }
         this.setState({showFoot:2});
-        console.log("UpdateCurrentPage:"+this.state.currentPage);
         this.onLoad(URL,this.state.currentPage+1);
     }
 
@@ -275,7 +271,6 @@ export default class Newc extends Component {
                 <TouchableOpacity
                     onPress={() => {
                         this.onPush(item.value.commodityId);
-                        console.log(this.state.id);
                         this.props.navigation.navigate('WebPage', {url: item.value.commodityUrl, ...this.props})
                     }}
                 >

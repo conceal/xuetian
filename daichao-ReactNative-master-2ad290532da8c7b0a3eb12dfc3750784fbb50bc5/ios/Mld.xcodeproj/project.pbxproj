@@ -1040,7 +1040,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = GVCC7N2J83;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1659,8 +1659,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Mld/Mld.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = GVCC7N2J83;
@@ -1704,8 +1704,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumei.Demo;
 				PRODUCT_NAME = Mld;
-				PROVISIONING_PROFILE = "e1cbe306-b806-4550-8a5e-74dfc2d9894c";
-				PROVISIONING_PROFILE_SPECIFIER = Distribute;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1715,8 +1715,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Mld/Mld.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GVCC7N2J83;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1759,8 +1759,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumei.Demo;
 				PRODUCT_NAME = Mld;
-				PROVISIONING_PROFILE = "e1cbe306-b806-4550-8a5e-74dfc2d9894c";
-				PROVISIONING_PROFILE_SPECIFIER = Distribute;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1994,7 +1994,7 @@
 				00E356F71AD99517003FC87E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Mld" */ = {
 			isa = XCConfigurationList;
@@ -2003,7 +2003,7 @@
 				13B07F951A680F5B00A75B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Mld-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -2012,7 +2012,7 @@
 				2D02E4981E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "Mld-tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -2021,7 +2021,7 @@
 				2D02E49A1E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Mld" */ = {
 			isa = XCConfigurationList;
@@ -2030,7 +2030,7 @@
 				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

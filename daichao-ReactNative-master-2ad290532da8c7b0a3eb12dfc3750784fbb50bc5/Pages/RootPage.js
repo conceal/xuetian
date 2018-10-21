@@ -1,5 +1,5 @@
 import {
-  View,
+    View,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import StartPage from "./StartPage";
@@ -33,185 +33,185 @@ import MyEarn from "./MyPageComponent/SectionComponent/MyEarn";
 import RewardRules from "./EarnPageComponent/RewardRules";
 
 const Root = StackNavigator({
-      Home: {
-        screen: StartPage,
-        navigationOptions: {
-          header: null
-        }
-      },
-      First: {
-        screen: StartPage,
-        navigationOptions: {
-          header: null
+        Home: {
+            screen: StartPage,
+            navigationOptions: {
+                header: null
+            }
         },
+        First: {
+            screen: StartPage,
+            navigationOptions: {
+                header: null
+            },
 
-      },
-      Second: {
-        screen: Login,
-      },
-      Fourth: {
-        screen: Message,
-      },
-      MyInvite: {
-        screen: MyInvite,
-      },
-      MyHelp: {
-        screen: MyHelp,
-      },
-      RewardRules: {
-        screen: RewardRules,
-      },
-      DetailHelp: {
-        screen: DetailHelp,
-      },
-      AboutUs: {
-        screen: AboutUs
-      },
-      Leave: {
-        screen: Leave
-      },
-      MyWeChat: {
-        screen: MyWeChat,
-      },
-      new: {
-        screen: RowList,
-      },
-      black: {
-        screen: RowList,
-      },
-      long: {
-        screen: RowList,
-      },
-      high: {
-        screen: RowList,
-      },
-      low: {
-        screen: RowList,
-      },
-      Setting: {
-        screen: Setting,
-        navigationOptions: {
-          headerTitle: '设置'
+        },
+        Second: {
+            screen: Login,
+        },
+        Fourth: {
+            screen: Message,
+        },
+        MyInvite: {
+            screen: MyInvite,
+        },
+        MyHelp: {
+            screen: MyHelp,
+        },
+        RewardRules: {
+            screen: RewardRules,
+        },
+        DetailHelp: {
+            screen: DetailHelp,
+        },
+        AboutUs: {
+            screen: AboutUs
+        },
+        Leave: {
+            screen: Leave
+        },
+        MyWeChat: {
+            screen: MyWeChat,
+        },
+        new: {
+            screen: RowList,
+        },
+        black: {
+            screen: RowList,
+        },
+        long: {
+            screen: RowList,
+        },
+        high: {
+            screen: RowList,
+        },
+        low: {
+            screen: RowList,
+        },
+        Setting: {
+            screen: Setting,
+            navigationOptions: {
+                headerTitle: '设置'
+            }
+        },
+        Register: {
+            screen: Register,
+            navigationOptions: {
+                title: '注册',
+                headerTitleStyle: {
+                    flex: 1,
+                    textAlign: 'center'
+                },
+                headerRight: (
+                    <View/>
+                )
+            }
+        },
+        Detail: {
+            screen: Detail,
+            navigationOptions: {
+                title: '注册',
+                headerTitleStyle: {
+                    flex: 1,
+                    textAlign: 'center'
+                },
+                headerRight: (
+                    <View/>
+                )
+            }
+        },
+        Invite: {
+            screen: Invite,
+            navigationOptions: {
+                title: '输入邀请码',
+                headerTitleStyle: {
+                    flex: 1,
+                    textAlign: 'center'
+                },
+                headerRight: (
+                    <View/>
+                )
+            }
+        },
+        Change_Name: {
+            screen: Change_Name,
+            navigationOptions: {
+                header:null,
+            }
+        },
+        Change_Password: {
+            screen: Change_Password,
+            navigationOptions: {
+                title: '修改密码'
+            }
+        },
+        Change_Teltel: {
+            screen: Change_Teltel,
+            navigationOptions: {
+                title: '手机号'
+            }
+        },
+        Change_TelChange: {
+            screen: Change_TelChange,
+            navigationOptions: {
+                title: '修改手机号'
+            }
+        },
+        Change_TelProve: {
+            screen: Change_TelProve,
+            navigationOptions: {
+                title: '输入验证码'
+            }
+        },
+        FindBackPage: {
+            screen: FindBackPage,
+            navigationOptions: {
+                title: '找回密码'
+            }
+        },
+        MyEarn: {
+            screen: MyEarn,
+            navigationOptions: {
+                title: '我的奖励'
+            }
+        },
+        NewPasswordPage: {
+            screen: NewPasswordPage,
+            navigationOptions: {
+                title: '新密码'
+            }
+        },
+        ProvePage: {
+            screen: ProvePage,
+            navigationOptions: {
+                title: '输入验证码'
+            }
+        },
+        SearchPage: {
+            screen: SearchPage,
+        },
+        LoginProve: {
+            screen: LoginProve,
+            navigationOptions: {
+                title: '输入验证码'
+            }
+        },
+        Prove: {
+            screen: Prove,
+            navigationOptions: {
+                title: '输入验证码',
+                headerTitleStyle: {
+                    flex: 1,
+                    textAlign: 'center'
+                },
+                headerRight: (
+                    <View/>
+                )
+            }
+        },
+        WebPage: {
+            screen: WebPage,
         }
-      },
-      Register: {
-        screen: Register,
-        navigationOptions: {
-          title: '注册',
-          headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center'
-          },
-          headerRight: (
-              <View/>
-          )
-        }
-      },
-      Detail: {
-        screen: Detail,
-        navigationOptions: {
-          title: '注册',
-          headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center'
-          },
-          headerRight: (
-              <View/>
-          )
-        }
-      },
-      Invite: {
-        screen: Invite,
-        navigationOptions: {
-          title: '输入邀请码',
-          headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center'
-          },
-          headerRight: (
-              <View/>
-          )
-        }
-      },
-      Change_Name: {
-        screen: Change_Name,
-        navigationOptions: {
-          header:null,
-        }
-      },
-      Change_Password: {
-        screen: Change_Password,
-        navigationOptions: {
-          title: '修改密码'
-        }
-      },
-      Change_Teltel: {
-        screen: Change_Teltel,
-        navigationOptions: {
-          title: '手机号'
-        }
-      },
-      Change_TelChange: {
-        screen: Change_TelChange,
-        navigationOptions: {
-          title: '修改手机号'
-        }
-      },
-      Change_TelProve: {
-        screen: Change_TelProve,
-        navigationOptions: {
-          title: '输入验证码'
-        }
-      },
-      FindBackPage: {
-        screen: FindBackPage,
-        navigationOptions: {
-          title: '找回密码'
-        }
-      },
-      MyEarn: {
-        screen: MyEarn,
-        navigationOptions: {
-          title: '我的奖励'
-        }
-      },
-      NewPasswordPage: {
-        screen: NewPasswordPage,
-        navigationOptions: {
-          title: '新密码'
-        }
-      },
-      ProvePage: {
-        screen: ProvePage,
-        navigationOptions: {
-          title: '输入验证码'
-        }
-      },
-      SearchPage: {
-        screen: SearchPage,
-      },
-      LoginProve: {
-        screen: LoginProve,
-        navigationOptions: {
-          title: '输入验证码'
-        }
-      },
-      Prove: {
-        screen: Prove,
-        navigationOptions: {
-          title: '输入验证码',
-          headerTitleStyle: {
-            flex: 1,
-            textAlign: 'center'
-          },
-          headerRight: (
-              <View/>
-          )
-        }
-      },
-      WebPage: {
-        screen: WebPage,
-      }
     }
 );
 

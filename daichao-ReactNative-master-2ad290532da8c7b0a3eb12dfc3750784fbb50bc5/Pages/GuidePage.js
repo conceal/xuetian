@@ -29,7 +29,6 @@ export default class GuidePage extends Component{
     onLoad() {
         this.utils.fetchNetRepository(url)
             .then(result => {
-                console.log(result);
                 this.setState({
                     img1:result.data.yindaoye1,
                     img2:result.data.yindaoye2,

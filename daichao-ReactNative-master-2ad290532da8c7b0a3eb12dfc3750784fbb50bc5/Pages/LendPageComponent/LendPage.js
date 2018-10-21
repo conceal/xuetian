@@ -11,8 +11,7 @@ import {
     Modal,
     AsyncStorage,
     TouchableWithoutFeedback,
-    DeviceEventEmitter,
-    Platform,
+    DeviceEventEmitter, Platform
 } from 'react-native';
 import JPushModule from 'jpush-react-native';
 import Icon from "react-native-vector-icons/EvilIcons";
@@ -26,7 +25,6 @@ import NetUtils from "../Common/NetUtils";
 let Dimensions = require('Dimensions');
 let {width} = Dimensions.get('window');
 let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
-
 let url = 'http://47.98.148.58/app/goods/homePage.do';
 let Url = 'http://47.98.148.58/app/goods/clickCount.do';
 let URL = 'http://47.98.148.58/app/user/checkUserStatusByTkid.do';
@@ -251,7 +249,6 @@ export default class LendPage extends Component {
         this.onLoad(this.state.currentPage);
         JPushModule.initPush();
         JPushModule.addGetRegistrationIdListener((registrationId) => {
-            console.log("Device register succeed, registrationId " + registrationId);
         });
         JPushModule.addReceiveOpenNotificationListener(() => {
             this.props.navigation.navigate('Fourth');
@@ -271,7 +268,6 @@ export default class LendPage extends Component {
     _onload() {
         AsyncStorage.getItem('login', (error, result) => {
             this.utils.fetchNetRepository(URL, {"tkid": result});
-            console.log("这是政哥返给我的" + result)
         });
     }
 
@@ -284,7 +280,6 @@ export default class LendPage extends Component {
 
                 let length = result.data.total;
                 let page = parseInt(length / 10) + 1;
-                console.log(result);
                 let datas = [];
                 let i = 0;
                 data.map(function (item) {
@@ -320,7 +315,6 @@ export default class LendPage extends Component {
                     });
                 }
                 if (Page % 2 === 0) {
-                    console.log("111111111111");
                     this.setModalVisible(true);
                 }
                 data = null;
@@ -402,6 +396,7 @@ export default class LendPage extends Component {
                         paddingLeft:ScreenUtils.scaleSize(8),
                         width:ScreenUtils.scaleSize(70),
                         color: 'red',
+                        marginTop: ScreenUtils.scaleSize(3),
                         fontSize: ScreenUtils.setSpText(14)
                     }}>恭喜</Text>
                     <View style={{marginLeft: ScreenUtils.scaleSize(3), flexDirection: 'row', flex: 1}}>

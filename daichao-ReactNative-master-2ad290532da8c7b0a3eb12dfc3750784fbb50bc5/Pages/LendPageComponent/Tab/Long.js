@@ -53,7 +53,6 @@ export default class Long extends Component {
             {"tabId":params.tab3Id,"pageNo":page},
         )
             .then(result => {
-                console.log(result);
                 let data = result.data.commodityList;
                 if (this.state.First === true){
                     imageurl = result.data.headerImg.headerImg;
@@ -136,7 +135,6 @@ export default class Long extends Component {
     }
 
     Load(){
-        console.log(this.state.isLoading);
         if (this.state.isLoading === true) {
             return<View style={styles.loading}>
                 <ActivityIndicator/>
@@ -203,7 +201,6 @@ export default class Long extends Component {
             })
         }
         this.setState({showFoot:2});
-        console.log("UpdateCurrentPage:"+this.state.currentPage);
         this.onLoad(URL,this.state.currentPage+1);
     }
 
@@ -273,7 +270,6 @@ export default class Long extends Component {
                 <TouchableOpacity
                     onPress={() => {
                         this.onPush(item.value.commodityId);
-                        console.log(this.state.id);
                         this.props.navigation.navigate('WebPage', {url: item.value.commodityUrl, ...this.props})
                     }}
                 >

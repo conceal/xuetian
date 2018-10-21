@@ -9,9 +9,7 @@ import {
     Dimensions,
     TouchableOpacity,
     FlatList,
-    TouchableWithoutFeedback,
-    DeviceEventEmitter,
-    Platform,
+    TouchableWithoutFeedback, DeviceEventEmitter, Platform,
 } from 'react-native';
 
 import Title from './Title';
@@ -20,8 +18,8 @@ import UShare from '../Common/share/share';
 import SharePlatform from '../Common/share/SharePlatform';
 import NetUtils from "../Common/NetUtils";
 import ScrollVertical from "../Common/ScrollVertical";
-
 let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
+
 let url = 'http://47.98.148.58/app/goods/makeMoney.do';
 let width = Dimensions.get('window');
 export default class EarnPage extends Component {
@@ -60,7 +58,6 @@ export default class EarnPage extends Component {
     onLoad() {
         this.utils.fetchNetRepository(url)
             .then(result => {
-                console.log(result);
                 this.setState({
                     image: result.data.headerImge.headerImg,
                     kuaibaoArray: result.data.mimiBulletin,
@@ -424,6 +421,4 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: 'white',
     }
-
-
 });
