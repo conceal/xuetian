@@ -130,14 +130,13 @@ const styles=StyleSheet.create({
     paddingTop:20,
     paddingBottom:40,
   },
-  picker:{
-    width:80,
-    height:50,
-    justifyContent:'center',
-    backgroundColor:'white',
-    color:'gray',
-    marginLeft:30
-  },
+    picker:{
+        width:100,
+        justifyContent:'center',
+        backgroundColor:'white',
+        color:'gray',
+        marginLeft:40
+    },
   touch:{
     backgroundColor:'#FFE059',
     borderRadius:5,

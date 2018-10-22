@@ -167,13 +167,13 @@ const styles=StyleSheet.create({
     flexDirection:'row',
     marginTop:10,
   },
-  picker:{
-    width:80,
-    alignItems:'center',
-    backgroundColor:'white',
-    color:'gray',
-    marginLeft:30
-  },
+    picker:{
+        width:100,
+        justifyContent:'center',
+        backgroundColor:'white',
+        color:'gray',
+        marginLeft:40
+    },
   touch:{
     backgroundColor:'#FFE059',
     borderRadius:5,

@@ -153,11 +153,11 @@ const styles=StyleSheet.create({
         paddingTop:20,
     },
     picker:{
-        width:80,
-        alignItems:'center',
+        width:100,
+        justifyContent:'center',
         backgroundColor:'white',
         color:'gray',
-        marginLeft:30
+        marginLeft:40
     },
     touch:{
         backgroundColor:'#FFE059',

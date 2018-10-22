@@ -400,10 +400,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: ScreenUtils.scaleSize(40)
     },
-    picker: {
-        marginRight: ScreenUtils.scaleSize(60),
-        height:50,
-        width: ScreenUtils.scaleSize(160)
+    picker:{
+        marginLeft: ScreenUtils.scaleSize(20),
+        width: ScreenUtils.scaleSize(200),
+        height:ScreenUtils.scaleSize(100)
     },
     warnStyle:{
         color:'red',
