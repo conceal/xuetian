@@ -122,16 +122,19 @@ const styles=StyleSheet.create({
   First:{
     flex:1,
     alignItems:'center',
-    backgroundColor:'#F3F4F6'
+      marginTop: 10,
+    backgroundColor:'#F3F4F6',
   },
   container:{
     height: 50,
-    flexDirection:'row',
+      flexDirection:'row',
+      alignItems:'center',
     paddingTop:20,
     paddingBottom:40,
   },
     picker:{
         width:100,
+        height:50,
         justifyContent:'center',
         backgroundColor:'white',
         color:'gray',

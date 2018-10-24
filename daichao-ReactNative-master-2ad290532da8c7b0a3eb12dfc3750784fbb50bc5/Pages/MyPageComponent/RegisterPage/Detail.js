@@ -33,10 +33,6 @@ export default class Detail extends Component{
     };
     componentDidMount(){
         JPushModule.initPush();
-        JPushModule.notifyJSDidLoad(resultCode => {
-            if (resultCode === 0) {
-            }
-        });
         JPushModule.getRegistrationID((registrationId) => {
             this.netUtils.fetchNetRepository(URL,
                 {"registrationId":registrationId});

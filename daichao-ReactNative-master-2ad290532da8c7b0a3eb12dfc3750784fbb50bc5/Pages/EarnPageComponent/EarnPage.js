@@ -18,10 +18,9 @@ import UShare from '../Common/share/share';
 import SharePlatform from '../Common/share/SharePlatform';
 import NetUtils from "../Common/NetUtils";
 import ScrollVertical from "../Common/ScrollVertical";
-let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
-
+let {width, height} = Dimensions.get('window');
+let isIphoneX = (Platform.OS === 'ios' && (Number(((height/width)+"").substr(0,4)) * 100) === 216);
 let url = 'http://47.98.148.58/app/goods/makeMoney.do';
-let width = Dimensions.get('window');
 export default class EarnPage extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +34,8 @@ export default class EarnPage extends Component {
             title:"",
             description1:'',
             description2:"",
-            description3:''
+            description3:'',
+            share12:''
         }
     }
 
@@ -65,7 +65,8 @@ export default class EarnPage extends Component {
                     description1:result.data.words.sec_word1,
                     description2:result.data.words.sec_word2,
                     description3:result.data.words.sec_word3,
-                    title:result.data.words.sec_word4
+                    title:result.data.words.sec_word4,
+                    share12:result.data.words.share1
                 });
                 DeviceEventEmitter.emit('title',this.state.title);
             })
@@ -122,8 +123,8 @@ export default class EarnPage extends Component {
     _qqshare() {
         UShare.share(
             '米米来',
-            '极简借贷 轻松解决燃眉之急',
-            'http://47.98.148.58/dc/dcweb/apkDownLoad.html',
+            this.state.share12,
+            'http://mimilike.cn/dc/dcweb/apkDownLoad.html',
             'http://47.98.148.58/imgUpload/defaultImg/icon.png',
             SharePlatform.QQ,
             (message) => {
@@ -134,8 +135,8 @@ export default class EarnPage extends Component {
     _qqzoneshare() {
         UShare.share(
             '米米来',
-            '极简借贷 轻松解决燃眉之急',
-            'http://47.98.148.58/dc/dcweb/apkDownLoad.html',
+            this.state.share12,
+            'http://mimilike.cn/dc/dcweb/apkDownLoad.html',
             'http://47.98.148.58/imgUpload/defaultImg/icon.png',
             SharePlatform.QQZONE,
             (message) => {
@@ -146,8 +147,8 @@ export default class EarnPage extends Component {
     _wechatzoneShare(){
         UShare.share(
             '米米来',
-            '极简借贷 轻松解决燃眉之急',
-            'http://47.98.148.58/dc/dcweb/apkDownLoad.html',
+            this.state.share12,
+            'http://mimilike.cn/dc/dcweb/apkDownLoad.html',
             'http://47.98.148.58/imgUpload/defaultImg/icon.png',
             SharePlatform.WECHATMOMENT,
             (message) => {
@@ -157,8 +158,8 @@ export default class EarnPage extends Component {
     _wechatShare(){
         UShare.share(
             '米米来',
-            '极简借贷 轻松解决燃眉之急',
-            'http://47.98.148.58/dc/dcweb/apkDownLoad.html',
+            this.state.share12,
+            'http://mimilike.cn/dc/dcweb/apkDownLoad.html',
             'http://47.98.148.58/imgUpload/defaultImg/icon.png',
             SharePlatform.WECHAT,
             (message) => {
@@ -219,7 +220,7 @@ export default class EarnPage extends Component {
                     <Text style={{
                         fontSize: ScreenUtils.setSpText(17),
                         color: '#E5E5E5'
-                    }}>-------------马上邀请好友得奖励-------------</Text>
+                    }}>-----------马上邀请好友得奖励-----------</Text>
                 </View>
                 <View style={styles.otherImageStyle}>
                     <TouchableOpacity

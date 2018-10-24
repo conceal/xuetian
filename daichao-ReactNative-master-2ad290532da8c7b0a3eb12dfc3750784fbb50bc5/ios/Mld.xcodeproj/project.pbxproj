@@ -47,8 +47,8 @@
 		56BCC59242914742B96FE0D6 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CFF845D3E04DDFBB8D5C3A /* CoreFoundation.framework */; };
 		5901541C390E4A0EB236126D /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EE5A32BE94D40319B50DF95 /* FontAwesome5_Brands.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		7534B628217F8BEB00E0513B /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7534B627217F8BEB00E0513B /* bundle */; };
 		755B6304215E7B5D008FE00F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 755B62DD215E7B5D008FE00F /* Images.xcassets */; };
-		755B6374215E7D1B008FE00F /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 755B634D215E7D1B008FE00F /* bundle */; };
 		75DC45E72135471E001EBDBB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DC45E62135471E001EBDBB /* SystemConfiguration.framework */; };
 		75DC45E921354728001EBDBB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DC45E821354728001EBDBB /* CoreGraphics.framework */; };
 		75DC45EB21354731001EBDBB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DC45EA21354731001EBDBB /* CoreTelephony.framework */; };
@@ -404,8 +404,8 @@
 		5524B2171E5D4C5BA0E35CC3 /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6282A450209D40BBB74F34C2 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		7534B627217F8BEB00E0513B /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		755B62DD215E7B5D008FE00F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Mld/Images.xcassets; sourceTree = "<group>"; };
-		755B634D215E7D1B008FE00F /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		75DC45E62135471E001EBDBB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		75DC45E821354728001EBDBB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		75DC45EA21354731001EBDBB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -632,7 +632,7 @@
 		13B07FAE1A68108700A75B9A /* Mld */ = {
 			isa = PBXGroup;
 			children = (
-				755B634D215E7D1B008FE00F /* bundle */,
+				7534B627217F8BEB00E0513B /* bundle */,
 				75E2214521424C7100829264 /* Mld.entitlements */,
 				75DC465821355050001EBDBB /* sharemodule.m */,
 				75DC463321355024001EBDBB /* sharemodule.h */,
@@ -1448,7 +1448,7 @@
 				75DC461721354B95001EBDBB /* UMSocialSDKPromptResources.bundle in Resources */,
 				3EB93C452F264D26815DCFE0 /* Zocial.ttf in Resources */,
 				75DC461421354B95001EBDBB /* UMSocialSDKResources.bundle in Resources */,
-				755B6374215E7D1B008FE00F /* bundle in Resources */,
+				7534B628217F8BEB00E0513B /* bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1663,7 +1663,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = GVCC7N2J83;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
@@ -1706,6 +1706,7 @@
 				PRODUCT_NAME = Mld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1718,7 +1719,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GVCC7N2J83;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UMSocial/UMSocialUI",
@@ -1761,6 +1762,7 @@
 				PRODUCT_NAME = Mld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1941,7 +1943,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1976,7 +1978,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;

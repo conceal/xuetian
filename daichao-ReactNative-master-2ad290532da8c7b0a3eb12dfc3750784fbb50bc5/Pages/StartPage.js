@@ -5,7 +5,7 @@ import {
     StyleSheet,
     StatusBar,
     DeviceEventEmitter,
-    Text,
+    Text, Platform, Dimensions,
 } from 'react-native'
 
 import TabNavigator from 'react-native-tab-navigator';
@@ -14,6 +14,8 @@ import EarnPage from './EarnPageComponent/EarnPage';
 import MyPage from './MyPageComponent/MyPage';
 import NetUtils from "./Common/NetUtils";
 let url = 'http://47.98.148.58/app/goods/homePage.do';
+let {width, height} = Dimensions.get('window');
+let isIphoneX = (Platform.OS === 'ios' && (Number(((height/width)+"").substr(0,4)) * 100) === 216);
 export default class StartPage extends Component{
     constructor(props){
         super(props);
@@ -113,6 +115,11 @@ export default class StartPage extends Component{
                         <MyPage{...this.props}/>
                     </TabNavigator.Item>
                 </TabNavigator>
+                {
+                    Platform.OS === 'ios' ?
+                        <View style={{height: Platform.OS === 'ios' ? (isIphoneX ? 20 : 0) : 0, backgroundColor: 'rgb(248,248,248)'}}>
+                        </View> : null
+                }
             </View>
         )
     }

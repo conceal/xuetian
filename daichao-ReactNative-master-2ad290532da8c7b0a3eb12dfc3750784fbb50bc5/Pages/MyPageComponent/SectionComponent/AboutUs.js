@@ -5,15 +5,15 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    StatusBar
+    StatusBar, Platform
 } from 'react-native';
 import * as ScreenUtils from "../../Common/ScreenUtils";
 import NetUtils from "../../Common/NetUtils";
 
 let Dimensions = require('Dimensions');
-let {width} = Dimensions.get('window');
-let {height} = Dimensions.get('window');
 let url ='http://47.98.148.58/app/dcPublic/checkInfoChange.do';
+let {width, height} = Dimensions.get('window');
+let isIphoneX = (Platform.OS === 'ios' && (Number(((height/width)+"").substr(0,4)) * 100) === 216);
 export default class AboutUs extends Component {
     static navigationOptions = {
         headerTitle: '关于我们',
@@ -73,13 +73,12 @@ export default class AboutUs extends Component {
                 <View style={{
                     width: width,
                     alignItems: 'center',
-                    bottom:0,
+                    bottom:isIphoneX ? 20 : 0,
                     position:'absolute'
                 }}>
                     <Text style={{fontSize: ScreenUtils.setSpText(18)}}>版权所有</Text>
                     <Text style={{fontSize: ScreenUtils.setSpText(16)}}>Copyright @ 2018-2019 MML Rights Reserved</Text>
                 </View>
-
             </View>
         )
     }

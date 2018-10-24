@@ -16,12 +16,12 @@ import NetUtils from "../Common/NetUtils";
 import CookieManager from 'react-native-cookies';
 
 let Dimensions = require('Dimensions');
-let {width} = Dimensions.get('window');
+let {width, height} = Dimensions.get('window');
 let url = 'http://47.98.148.58/app/user/showUserInfo.do';
 let URL = 'http://47.98.148.58/app/user/logoff.do';
 let Url = "http://47.98.148.58/app/user/versionCheckAndUpd.do";
 let URl = "http://47.98.148.58/dc/dcweb/apkDownLoad.html";
-let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
+let isIphoneX = (Platform.OS === 'ios' && (Number(((height/width)+"").substr(0,4)) * 100) === 216);
 export default class MyPage extends Component {
 
     constructor(props) {

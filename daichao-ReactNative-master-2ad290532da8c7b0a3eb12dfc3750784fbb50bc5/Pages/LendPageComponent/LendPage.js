@@ -23,8 +23,8 @@ import * as ScreenUtils from "../Common/ScreenUtils";
 import NetUtils from "../Common/NetUtils";
 
 let Dimensions = require('Dimensions');
-let {width} = Dimensions.get('window');
-let isIphoneX = Dimensions.get('window').width === 375 && Dimensions.get('window').height === 812;
+let {width, height} = Dimensions.get('window');
+let isIphoneX = (Platform.OS === 'ios' && (Number(((height/width)+"").substr(0,4)) * 100) === 216);
 let url = 'http://47.98.148.58/app/goods/homePage.do';
 let Url = 'http://47.98.148.58/app/goods/clickCount.do';
 let URL = 'http://47.98.148.58/app/user/checkUserStatusByTkid.do';

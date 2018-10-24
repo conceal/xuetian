@@ -81,28 +81,27 @@ export default class Change_Password extends Component{
             <View style={styles.First}>
                 <View style={styles.container1}>
                     <View style={{justifyContent:'center',
-                        alignItems:'center',width:70,backgroundColor:'white'}}>
+                        alignItems:'center',width:70, height: 50,backgroundColor:'white'}}>
                         <Text style={styles.old}>新密码</Text>
                     </View>
                     <TextInput
                         placeholder={'输入原密码'}
                         maxLength={11}
-                        style={{width:width-70,backgroundColor:'white'}}
+                        style={{width:width-70, height: 50,backgroundColor:'white'}}
                         underlineColorAndroid={'transparent'}
                         keyboardType={'default'}
                         onChangeText={(text)=>this.setState({oldPwd:text})}
                     />
-
                 </View>
                 <View style={styles.container2}>
                     <View style={{justifyContent:'center',
-                        alignItems:'center',width:70,backgroundColor:'white'}}>
+                        alignItems:'center',width:70, height: 50, backgroundColor:'white'}}>
                         <Text style={styles.old}>确认密码</Text>
                     </View>
                     <TextInput
                         placeholder={'输入新密码'}
                         maxLength={11}
-                        style={{width:width-70,backgroundColor:'white'}}
+                        style={{width:width-70, height: 50, backgroundColor:'white'}}
                         underlineColorAndroid={'transparent'}
                         keyboardType={'default'}
                         onChangeText={(text)=>this.setState({newPwd:text})}
@@ -145,12 +144,14 @@ const styles=StyleSheet.create({
     },
     container2:{
         flexDirection:'row',
-        paddingTop:2,
+        height: 50,
         paddingBottom:40,
+        marginTop: 5,
     },
     container1:{
+        height: 50,
         flexDirection:'row',
-        paddingTop:20,
+        marginTop: 10,
     },
     picker:{
         width:100,

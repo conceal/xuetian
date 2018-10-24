@@ -42,12 +42,11 @@ export default class Title extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        flexDirection:'row',
-        paddingLeft:ScreenUtils.scaleSize(30),
-        paddingBottom:ScreenUtils.scaleSize(11),
-        backgroundColor:'#FFE059',
-        alignItems:'center',
-        justifyContent:'center',
+        height: ScreenUtils.scaleSize(80),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: '#FFE059',
+        alignItems: 'center'
     },
     title:{
         fontSize:ScreenUtils.setSpText(22),

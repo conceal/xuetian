@@ -188,14 +188,15 @@ export default class Message extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     wrap: {
-        padding: 6,
+        // padding: 6,
         flexDirection: 'row',
         width: ScreenUtils.scaleSize(749),
         height: ScreenUtils.scaleSize(136),
-    }, item: {
+    },
+    item: {
 
         flexDirection: 'column',
         marginLeft: 9
@@ -219,7 +220,6 @@ const styles = StyleSheet.create({
     },
     wholeview: {
         flexDirection: 'column',
-        padding: 6
     },
     rightSwipeItem: {
         flex: 1,
